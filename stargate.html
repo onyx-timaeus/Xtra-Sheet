@@ -5,57 +5,30 @@
   <button class="pc" type="action" name="act_character">Character</button>
   <button class="pc" type="action" name="act_background">Background</button>
   <button class="npc" type="action" name="act_npc">NPC</button>
-  <button type="action" name="act_settings">Settings</button><span class="version bold">Sheet Version: <span name="attr_version"></span></span>
+  <button type="action" name="act_settings">Settings</button>
 </div>
 <input class="tabstoggle" type="hidden" name="attr_sheetTab" value="character"/>
 <main class="character">
   <section class="name columnflex nowrap">
     <div class="rowflex nowrap spaced">
       <div class="columnflex nowrap">
-        <label style="width:100px;">Character name</label>
+        <label>Name</label>
         <input name="attr_character_name" type="text"/>
       </div>
       <div class="columnflex nowrap">
-        <label style="width:80px;">Player name</label>
-        <input name="attr_player_name" type="text"/>
-      </div>
-      <div class="columnflex nowrap">
-        <label>Campaign</label>
-        <input name="attr_campaign" type="text"/>
-      </div>
-      <div class="rowflex nowrap">
-        <div class="columnflex nowrap dice">
-          <label class="w70" title="@{td}">Tension Die</label>
-          <select class="td" name="attr_td" title="Tension Die @{td}">
-            <option value="d4">d4</option>
-            <option value="d6" selected="">d6</option>
-            <option value="d8">d8</option>
-            <option value="d10">d10</option>
-            <option value="d12">d12</option>
-          </select>
-        </div>
-        <button name="roll_td" type="roll" title="Roll Tension Die %{td}" value="@{whisper}&amp;{template:stargate} {{title=Tension Die (@{td})}} @{show_name}  {{Roll=[[@{td}]]}} {{desc=Rolls the current tension die for the episode. }}"> TD</button>
-      </div>
-    </div>
-    <div class="rowflex nowrap spaced row2">
-      <div class="columnflex nowrap">
         <label>Race</label>
         <input name="attr_race" list="race" placeholder="race" type="text"/>
-      </div>
-      <div class="columnflex nowrap">
-        <label>Origin</label>
-        <input name="attr_origin" list="origin" placeholder="origin" type="text"/>
       </div>
       <div class="columnflex nowrap">
         <label>Class</label>
         <input name="attr_class" list="rpgclass" placeholder="class" type="text"/>
       </div>
       <div class="columnflex nowrap">
-        <label class="w40" title="@{rank}">Level</label>
+        <label title="@{rank}">Level</label>
         <input class="w40" name="attr_rank" title="@{rank}" type="number" placeholder="1"/>
       </div>
       <div class="columnflex nowrap">
-        <label class="w30">MP</label>
+        <label>MP</label>
         <input class="w40" name="attr_mp" type="number" placeholder="" title="Mission Points"/>
       </div>
       <input class="eureka" name="attr_class" type="hidden"/>
@@ -67,9 +40,31 @@
           <input class="w40" name="attr_eureka_max" type="number" placeholder="" title="Max Eureka Points: @{eureka|max}"/>
         </div>
       </div>
-      <div class="rowflex nowrap">
-        <div class="columnflex nowrap dice">
-          <label class="w40" title="Hit Dice">HD</label>
+    </div>
+    <div class="rowflex nowrap spaced row2">
+      <div class="columnflex nowrap">
+        <label>Determination</label>
+        <div class="rowflex nowrap">
+          <input class="stat w40" name="attr_determination" type="number" value="2" title="@{determination}"/><span class="slash">/</span>
+          <input class="stat w40" name="attr_determination_max" type="number" value="2" title="@{determination|max}"/>
+        </div>
+      </div>
+      <div class="columnflex nowrap">
+        <label title="@{td}">Tension Die</label>
+        <div class="rowflex nowrap dice-row">
+          <select class="td" name="attr_td" title="Tension Die @{td}">
+            <option value="d4">d4</option>
+            <option value="d6" selected="">d6</option>
+            <option value="d8">d8</option>
+            <option value="d10">d10</option>
+            <option value="d12">d12</option>
+          </select>
+          <button name="roll_td" type="roll" title="Roll Tension Die %{td}" value="@{whisper}&amp;{template:stargate} {{title=Tension Die (@{td})}} @{show_name}  {{Roll=[[@{td}]]}} {{desc=Rolls the current tension die for the episode. }} {{condition_note=@{condition_effects}}}"> TD</button>
+        </div>
+      </div>
+      <div class="columnflex nowrap">
+        <label title="Hit Dice">HD</label>
+        <div class="rowflex nowrap dice-row">
           <select name="attr_hd" title="Hit Dice: @{hd}">
             <option value="d4">d4</option>
             <option value="d6" selected="">d6</option>
@@ -77,34 +72,49 @@
             <option value="d10">d10</option>
             <option value="d12">d12</option>
           </select>
+          <button name="roll_hd" type="roll" title="%{hd}" value="@{whisper}&amp;{template:stargate} {{color=green}} {{title=Hit Dice}} @{show_name} !modbattr --silent --name @{character_name} --hp|{{Healing=[[@{hd}]]}}!!! {{desc=One roll of the Hit Dice.}} {{condition_note=@{condition_effects}}}"> HD</button>
         </div>
-        <button name="roll_hd" type="roll" title="%{hd}" value="@{whisper}&amp;{template:stargate} {{color=green}} {{title=Hit Dice}} @{show_name} !modbattr --silent --name @{character_name} --hp|{{Healing=[[@{hd}]]}}!!! {{desc=One roll of the Hit Dice.}}"> HD</button>
       </div>
     </div>
   </section>
-  <div class="attr columnflex nowrap center">
+  <div class="deathsave-box">
+    <div class="section death columnflex nowrap middle center">
+      <button class="txt-btn large" name="roll_deathsave" type="roll" value="@{whisper}&amp;{template:stargate} {{color=black}} {{title=Death Save}} @{show_name} {{Result=[[d20]]}}" title="%{deathsave}">Death Save</button>
+      <div class="rowflex nowrap gap5">
+        <input name="attr_death_success1" type="checkbox" value="1"/>
+        <input name="attr_death_success2" type="checkbox" value="1"/>
+        <input name="attr_death_success3" type="checkbox" value="1"/><span>Sucesses</span>
+      </div>
+      <div class="rowflex nowrap gap5">
+        <input name="attr_death_failure1" type="checkbox" value="1"/>
+        <input name="attr_death_failure2" type="checkbox" value="1"/>
+        <input name="attr_death_failure3" type="checkbox" value="1"/><span class="pad">Failures</span>
+      </div>
+    </div>
+  </div>
+  <div class="attr rowflex nowrap center">
     <div class="stat columnflex nowrap center middle">
-      <button class="txt-btn large" name="roll_str" title="%{str}" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Strength Check}} @{show_name} {{[[d20+(@{str_mod})]]=[[d20+(@{str_mod})]]}}">STR</button>
+      <button class="txt-btn large" name="roll_str" title="%{str}" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Strength Check}} @{show_name} {{[[d20+(@{str_mod})]]=[[d20+(@{str_mod})]]}} {{condition_note=@{condition_effects}}}">STR</button>
       <input name="attr_str" type="number" value="10"/><span class="mod" name="attr_str_mod" title="@{str_mod}"></span>
     </div>
     <div class="stat columnflex nowrap center middle">
-      <button class="txt-btn large" name="roll_dex" title="%{dex}" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Dexterity Check}} @{show_name} {{[[d20+(@{dex_mod})]]=[[d20+(@{dex_mod})]]}}">DEX</button>
+      <button class="txt-btn large" name="roll_dex" title="%{dex}" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Dexterity Check}} @{show_name} {{[[d20+(@{dex_mod})]]=[[d20+(@{dex_mod})]]}} {{condition_note=@{condition_effects}}}">DEX</button>
       <input name="attr_dex" type="number" value="10"/><span class="mod" name="attr_dex_mod" title="@{dex_mod}"></span>
     </div>
     <div class="stat columnflex nowrap center middle">
-      <button class="txt-btn large" name="roll_con" title="%{con}" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Constitution Check}} @{show_name} {{[[d20+(@{con_mod})]]=[[d20+(@{con_mod})]]}}">CON</button>
+      <button class="txt-btn large" name="roll_con" title="%{con}" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Constitution Check}} @{show_name} {{[[d20+(@{con_mod})]]=[[d20+(@{con_mod})]]}} {{condition_note=@{condition_effects}}}">CON</button>
       <input name="attr_con" type="number" value="10"/><span class="mod" name="attr_con_mod" title="@{con_mod}"></span>
     </div>
     <div class="stat columnflex nowrap center middle">
-      <button class="txt-btn large" name="roll_int" title="%{int}" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Intelligence Check}} @{show_name} {{[[d20+(@{int_mod})]]=[[d20+(@{int_mod})]]}}">INT</button>
+      <button class="txt-btn large" name="roll_int" title="%{int}" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Intelligence Check}} @{show_name} {{[[d20+(@{int_mod})]]=[[d20+(@{int_mod})]]}} {{condition_note=@{condition_effects}}}">INT</button>
       <input name="attr_int" type="number" value="10"/><span class="mod" name="attr_int_mod" title="@{int_mod}"></span>
     </div>
     <div class="stat columnflex nowrap center middle">
-      <button class="txt-btn large" name="roll_wis" title="%{wis}" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Wisdom Check}} @{show_name} {{[[d20+(@{wis_mod})]]=[[d20+(@{wis_mod})]]}}">WIS</button>
+      <button class="txt-btn large" name="roll_wis" title="%{wis}" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Wisdom Check}} @{show_name} {{[[d20+(@{wis_mod})]]=[[d20+(@{wis_mod})]]}} {{condition_note=@{condition_effects}}}">WIS</button>
       <input name="attr_wis" type="number" value="10"/><span class="mod" name="attr_wis_mod" title="@{wis_mod}"></span>
     </div>
     <div class="stat columnflex nowrap center middle">
-      <button class="txt-btn large" name="roll_cha" title="%{cha}" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Charisma Check}} @{show_name} {{[[d20+(@{cha_mod})]]=[[d20+(@{cha_mod})]]}}">CHA</button>
+      <button class="txt-btn large" name="roll_cha" title="%{cha}" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Charisma Check}} @{show_name} {{[[d20+(@{cha_mod})]]=[[d20+(@{cha_mod})]]}} {{condition_note=@{condition_effects}}}">CHA</button>
       <input name="attr_cha" type="number" value="10"/><span class="mod" name="attr_cha_mod" title="@{cha_mod}"></span>
     </div>
   </div>
@@ -113,113 +123,173 @@
     <div class="rowflex nowrap">
       <input name="attr_acrobatics_c" type="checkbox" value="1" title="Proficency"/>
       <input class="w30" name="attr_acrobatics" type="number" title="@{acrobatics}" value="0"/>
-      <button class="txt-btn" name="roll_acrobatics" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Acrobatics Check}} @{show_name} {{[[d20+(@{acrobatics})]]=[[d20+(@{acrobatics})]]}}">Acrobatics</button><span>(dex)</span>
+      <button class="txt-btn" name="roll_acrobatics" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Acrobatics Check}} @{show_name} {{[[d20+(@{acrobatics})]]=[[d20+(@{acrobatics})]]}} {{condition_note=@{condition_effects}}}">Acrobatics</button><span>(dex)</span>
     </div>
     <div class="rowflex nowrap">
       <input name="attr_animalhandling_c" type="checkbox" value="1" title="Proficency"/>
       <input class="w30" name="attr_animalhandling" type="number" title="@{animalhandling}" value="0"/>
-      <button class="txt-btn" name="roll_animalhandling" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Animal Handling Check}} @{show_name} {{[[d20+(@{animalhandling})]]=[[d20+(@{animalhandling})]]}}">Animal Handling</button><span>(wis)</span>
+      <button class="txt-btn" name="roll_animalhandling" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Animal Handling Check}} @{show_name} {{[[d20+(@{animalhandling})]]=[[d20+(@{animalhandling})]]}} {{condition_note=@{condition_effects}}}">Animal Handling</button><span>(wis)</span>
     </div>
     <div class="rowflex nowrap">
       <input name="attr_athletics_c" type="checkbox" value="1" title="Proficency"/>
       <input class="w30" name="attr_athletics" type="number" title="@{athletics}" value="0"/>
-      <button class="txt-btn" name="roll_athletics" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Athletics Check}} @{show_name} {{[[d20+(@{athletics})]]=[[d20+(@{athletics})]]}}">Athletics</button><span>(str)</span>
+      <button class="txt-btn" name="roll_athletics" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Athletics Check}} @{show_name} {{[[d20+(@{athletics})]]=[[d20+(@{athletics})]]}} {{condition_note=@{condition_effects}}}">Athletics</button><span>(str)</span>
     </div>
     <div class="rowflex nowrap">
       <input name="attr_culture_c" type="checkbox" value="1" title="Proficency"/>
       <input class="w30" name="attr_culture" type="number" title="@{culture}" value="0"/>
-      <button class="txt-btn" name="roll_culture" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Culture Check}} @{show_name} {{[[d20+(@{culture})]]=[[d20+(@{culture})]]}}">Culture</button><span>(wis)</span>
+      <button class="txt-btn" name="roll_culture" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Culture Check}} @{show_name} {{[[d20+(@{culture})]]=[[d20+(@{culture})]]}} {{condition_note=@{condition_effects}}}">Culture</button><span>(wis)</span>
     </div>
     <div class="rowflex nowrap">
       <input name="attr_deception_c" type="checkbox" value="1" title="Proficency"/>
       <input class="w30" name="attr_deception" type="number" title="@{deception}" value="0"/>
-      <button class="txt-btn" name="roll_deception" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Deception Check}} @{show_name} {{[[d20+(@{deception})]]=[[d20+(@{deception})]]}}">Deception</button><span>(cha)</span>
+      <button class="txt-btn" name="roll_deception" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Deception Check}} @{show_name} {{[[d20+(@{deception})]]=[[d20+(@{deception})]]}} {{condition_note=@{condition_effects}}}">Deception</button><span>(cha)</span>
     </div>
     <div class="rowflex nowrap">
       <input name="attr_engineering_c" type="checkbox" value="1" title="Proficency"/>
       <input class="w30" name="attr_engineering" type="number" title="@{engineering}" value="0"/>
-      <button class="txt-btn" name="roll_engineering" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Engineering Check}} @{show_name} {{[[d20+(@{engineering})]]=[[d20+(@{engineering})]]}}">Engineering</button><span>(int)</span>
+      <button class="txt-btn" name="roll_engineering" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Engineering Check}} @{show_name} {{[[d20+(@{engineering})]]=[[d20+(@{engineering})]]}} {{condition_note=@{condition_effects}}}">Engineering</button><span>(int)</span>
     </div>
     <div class="rowflex nowrap">
       <input name="attr_insight_c" type="checkbox" value="1" title="Proficency"/>
       <input class="w30" name="attr_insight" type="number" title="@{insight}" value="0"/>
-      <button class="txt-btn" name="roll_insight" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Insight Check}} @{show_name} {{[[d20+(@{insight})]]=[[d20+(@{insight})]]}}">Insight</button><span>(wis)</span>
+      <button class="txt-btn" name="roll_insight" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Insight Check}} @{show_name} {{[[d20+(@{insight})]]=[[d20+(@{insight})]]}} {{condition_note=@{condition_effects}}}">Insight</button><span>(wis)</span>
     </div>
     <div class="rowflex nowrap">
       <input name="attr_intimidation_c" type="checkbox" value="1" title="Proficency"/>
       <input class="w30" name="attr_intimidation" type="number" title="@{intimidation}" value="0"/>
-      <button class="txt-btn" name="roll_intimidation" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Intimidation Check}} @{show_name} {{[[d20+(@{intimidation})]]=[[d20+(@{intimidation})]]}}">Intimidation</button><span>(cha)</span>
+      <button class="txt-btn" name="roll_intimidation" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Intimidation Check}} @{show_name} {{[[d20+(@{intimidation})]]=[[d20+(@{intimidation})]]}} {{condition_note=@{condition_effects}}}">Intimidation</button><span>(cha)</span>
     </div>
     <div class="rowflex nowrap">
       <input name="attr_investigation_c" type="checkbox" value="1" title="Proficency"/>
       <input class="w30" name="attr_investigation" type="number" title="@{investigation}" value="0"/>
-      <button class="txt-btn" name="roll_investigation" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Investigation Check}} @{show_name} {{[[d20+(@{investigation})]]=[[d20+(@{investigation})]]}}">Investigation</button><span>(int)</span>
+      <button class="txt-btn" name="roll_investigation" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Investigation Check}} @{show_name} {{[[d20+(@{investigation})]]=[[d20+(@{investigation})]]}} {{condition_note=@{condition_effects}}}">Investigation</button><span>(int)</span>
     </div>
     <div class="rowflex nowrap">
       <input name="attr_medicine_c" type="checkbox" value="1" title="Proficency"/>
       <input class="w30" name="attr_medicine" type="number" title="@{medicine}" value="0"/>
-      <button class="txt-btn" name="roll_medicine" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Medicine Check}} @{show_name} {{[[d20+(@{medicine})]]=[[d20+(@{medicine})]]}}">Medicine</button><span>(wis)</span>
+      <button class="txt-btn" name="roll_medicine" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Medicine Check}} @{show_name} {{[[d20+(@{medicine})]]=[[d20+(@{medicine})]]}} {{condition_note=@{condition_effects}}}">Medicine</button><span>(wis)</span>
     </div>
     <div class="rowflex nowrap">
       <input name="attr_nature_c" type="checkbox" value="1" title="Proficency"/>
       <input class="w30" name="attr_nature" type="number" title="@{nature}" value="0"/>
-      <button class="txt-btn" name="roll_nature" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Nature Check}} @{show_name} {{[[d20+(@{nature})]]=[[d20+(@{nature})]]}}">Nature</button><span>(int)</span>
+      <button class="txt-btn" name="roll_nature" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Nature Check}} @{show_name} {{[[d20+(@{nature})]]=[[d20+(@{nature})]]}} {{condition_note=@{condition_effects}}}">Nature</button><span>(int)</span>
     </div>
     <div class="rowflex nowrap">
       <input name="attr_perception_c" type="checkbox" value="1" title="Proficency"/>
       <input class="w30" name="attr_perception" type="number" title="@{perception}" value="0"/>
-      <button class="txt-btn" name="roll_perception" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Perception Check}} @{show_name} {{[[d20+(@{perception})]]=[[d20+(@{perception})]]}}">Perception</button><span>(wis)</span>
+      <button class="txt-btn" name="roll_perception" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Perception Check}} @{show_name} {{[[d20+(@{perception})]]=[[d20+(@{perception})]]}} {{condition_note=@{condition_effects}}}">Perception</button><span>(wis)</span>
     </div>
     <div class="rowflex nowrap">
       <input name="attr_performance_c" type="checkbox" value="1" title="Proficency"/>
       <input class="w30" name="attr_performance" type="number" title="@{performance}" value="0"/>
-      <button class="txt-btn" name="roll_performance" type="roll" value="@{whisper}&amp;{template:stargate} {{title=performance Check}} @{show_name} {{[[d20+(@{performance})]]=[[d20+(@{performance})]]}}">performance</button><span>(cha)</span>
+      <button class="txt-btn" name="roll_performance" type="roll" value="@{whisper}&amp;{template:stargate} {{title=performance Check}} @{show_name} {{[[d20+(@{performance})]]=[[d20+(@{performance})]]}} {{condition_note=@{condition_effects}}}">performance</button><span>(cha)</span>
     </div>
     <div class="rowflex nowrap">
       <input name="attr_persuasion_c" type="checkbox" value="1" title="Proficency"/>
       <input class="w30" name="attr_persuasion" type="number" title="@{persuasion}" value="0"/>
-      <button class="txt-btn" name="roll_persuasion" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Persuasion Check}} @{show_name} {{[[d20+(@{persuasion})]]=[[d20+(@{persuasion})]]}}">Persuasion</button><span>(cha)</span>
+      <button class="txt-btn" name="roll_persuasion" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Persuasion Check}} @{show_name} {{[[d20+(@{persuasion})]]=[[d20+(@{persuasion})]]}} {{condition_note=@{condition_effects}}}">Persuasion</button><span>(cha)</span>
     </div>
     <div class="rowflex nowrap">
       <input name="attr_pilot_c" type="checkbox" value="1" title="Proficency"/>
       <input class="w30" name="attr_pilot" type="number" title="@{pilot}" value="0"/>
-      <button class="txt-btn" name="roll_pilot" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Pilot Check}} @{show_name} {{[[d20+(@{pilot})]]=[[d20+(@{pilot})]]}}">Pilot</button><span>(dex)</span>
+      <button class="txt-btn" name="roll_pilot" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Pilot Check}} @{show_name} {{[[d20+(@{pilot})]]=[[d20+(@{pilot})]]}} {{condition_note=@{condition_effects}}}">Pilot</button><span>(dex)</span>
     </div>
     <div class="rowflex nowrap">
       <input name="attr_science_c" type="checkbox" value="1" title="Proficency"/>
       <input class="w30" name="attr_science" type="number" title="@{science}" value="0"/>
-      <button class="txt-btn" name="roll_science" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Science Check}} @{show_name} {{[[d20+(@{science})]]=[[d20+(@{science})]]}}">Science</button><span>(int)</span>
+      <button class="txt-btn" name="roll_science" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Science Check}} @{show_name} {{[[d20+(@{science})]]=[[d20+(@{science})]]}} {{condition_note=@{condition_effects}}}">Science</button><span>(int)</span>
     </div>
     <div class="rowflex nowrap">
       <input name="attr_sleight_c" type="checkbox" value="1" title="Proficency"/>
       <input class="w30" name="attr_sleight" type="number" title="@{sleight}" value="0"/>
-      <button class="txt-btn" name="roll_sleight" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Sleight of Hand Check}} @{show_name} {{[[d20+(@{sleight})]]=[[d20+(@{sleight})]]}}">Sleight of Hand</button><span>(dex)</span>
+      <button class="txt-btn" name="roll_sleight" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Sleight of Hand Check}} @{show_name} {{[[d20+(@{sleight})]]=[[d20+(@{sleight})]]}} {{condition_note=@{condition_effects}}}">Sleight of Hand</button><span>(dex)</span>
     </div>
     <div class="rowflex nowrap">
       <input name="attr_stealth_c" type="checkbox" value="1" title="Proficency"/>
       <input class="w30" name="attr_stealth" type="number" title="@{stealth}" value="0"/>
-      <button class="txt-btn" name="roll_stealth" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Stealth Check}} @{show_name} {{[[d20+(@{stealth})]]=[[d20+(@{stealth})]]}}">Stealth</button><span>(dex)</span>
+      <button class="txt-btn" name="roll_stealth" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Stealth Check}} @{show_name} {{[[d20+(@{stealth})]]=[[d20+(@{stealth})]]}} {{condition_note=@{condition_effects}}}">Stealth</button><span>(dex)</span>
     </div>
     <div class="rowflex nowrap">
       <input name="attr_survival_c" type="checkbox" value="1" title="Proficency"/>
       <input class="w30" name="attr_survival" type="number" title="@{survival}" value="0"/>
-      <button class="txt-btn" name="roll_survival" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Survival Check}} @{show_name} {{[[d20+(@{survival})]]=[[d20+(@{survival})]]}}">Survival</button><span>(wis)</span>
+      <button class="txt-btn" name="roll_survival" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Survival Check}} @{show_name} {{[[d20+(@{survival})]]=[[d20+(@{survival})]]}} {{condition_note=@{condition_effects}}}">Survival</button><span>(wis)</span>
     </div>
   </section>
-  <section class="hp rowflex nowrap">
-    <div class="section columnflex nowrap middle center">
-      <label class="txtcenter" title="Hit Points">HP</label>
-      <div class="rowflex nowrap">
-        <input class="stat w40" name="attr_hp" type="number" value="" placeholder="20" title="@{hp}"/><span class="slash">/</span>
-        <input class="stat w40" name="attr_hp_max" type="number" value="" placeholder="20" title="@{hp|max}"/>
+  <div class="right-side">
+    <div class="stats-container">
+      <div class="stat-box hp-box">
+        <label title="Hit Points">HP</label>
+        <div class="stat-row">
+          <input class="stat w40" name="attr_hp" type="number" value="" placeholder="20" title="@{hp}"/><span class="slash">/</span>
+          <input class="stat w40" name="attr_hp_max" type="number" value="" placeholder="20" title="@{hp|max}"/>
+        </div>
+      </div>
+      <div class="stat-box temp-hp-box">
+        <label title="Temporary Hit Points">Temp HP</label>
+        <div class="stat-row">
+          <input class="stat w40" name="attr_hp_temp" type="number" value="" title="@{hp_temp}"/><span class="slash">/</span>
+          <input class="stat w40" name="attr_hp_temp_max" type="number" value="" title="@{hp_temp|max}"/>
+        </div>
+      </div>
+      <div class="stat-box ac-box">
+        <label>Armor Class</label>
+        <input class="stat w70" name="attr_ac" type="number" value="10" title="@{ac}"/>
+      </div>
+      <div class="stat-box speed-box">
+        <label>Speed</label>
+        <input class="w70 stat" name="attr_speed" type="text" value="6m"/>
+      </div>
+      <div class="stat-box">
+        <button class="txt-btn" name="roll_init" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Initiative}} @{show_name} {{ Roll =[[@{init_dice}+(@{init}) &amp;{tracker}]]}}" title="%{init}">Initiative</button>
+        <input class="stat w40" name="attr_init" type="number" value="0" title="@{init}"/>
+      </div>
+      <div class="stat-box">
+        <button class="txt-btn" name="roll_moxie" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Moxie}} @{show_name} {{ Roll =[[@{moxie_dice}+(@{moxie}) &amp;{tracker}]]}}" title="Social Initiative: %{moxie}">Moxie</button>
+        <input class="stat w40" name="attr_moxie" type="number" value="0" title="Social Initiative: @{moxie}"/>
+      </div>
+      <div class="stat-box">
+        <label title="@{bulk}">Bulk</label>
+        <input class="stat w40" name="attr_bulk" type="number" value="8" title="@{bulk}"/>
+      </div>
+      <div class="stat-box">
+        <label title="Proficiency Bonus">Prof Bonus</label>
+        <input class="stat w40" name="attr_prof" type="number" value="2" title="Proficiency Bonus: @{prof}"/>
       </div>
     </div>
-    <div class="section columnflex nowrap middle center temphp">
-      <label class="txtcenter" title="Temporary Hit Points">Temp HP</label>
-      <div class="rowflex nowrap">
-        <input class="stat w40" name="attr_hp_temp" type="number" value="" title="@{hp_temp}"/><span class="slash">/</span>
-        <input class="stat w40" name="attr_hp_temp_max" type="number" value="" title="@{hp_temp|max}"/>
-      </div>
+    <div class="saves-inventory-container">
+      <div class="saves-condition-column">
+        <section class="saves columnflex nowrap">
+    <h3>Saves</h3>
+    <div class="rowflex nowrap">
+      <input name="attr_str_save_c" type="checkbox" value="1"/>
+      <input class="w30" name="attr_str_save" title="@{str_save}" type="number" value="0"/>
+      <button class="txt-btn" name="roll_str_save" title="%{str_save}" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Strength Save}} @{show_name} {{[[d20+(@{str_save})]]=[[d20+(@{str_save})]]}} {{condition_note=@{condition_effects}}}">Strength</button>
+    </div>
+    <div class="rowflex nowrap">
+      <input name="attr_dex_save_c" type="checkbox" value="1"/>
+      <input class="w30" name="attr_dex_save" title="@{dex_save}" type="number" value="0"/>
+      <button class="txt-btn" name="roll_dex_save" title="%{dex_save}" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Dexterity Save}} @{show_name} {{[[d20+(@{dex_save})]]=[[d20+(@{dex_save})]]}} {{condition_note=@{condition_effects}}}">Dexterity</button>
+    </div>
+    <div class="rowflex nowrap">
+      <input name="attr_con_save_c" type="checkbox" value="1"/>
+      <input class="w30" name="attr_con_save" title="@{con_save}" type="number" value="0"/>
+      <button class="txt-btn" name="roll_con_save" title="%{con_save}" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Constitution Save}} @{show_name} {{[[d20+(@{con_save})]]=[[d20+(@{con_save})]]}} {{condition_note=@{condition_effects}}}">Constitution</button>
+    </div>
+    <div class="rowflex nowrap">
+      <input name="attr_int_save_c" type="checkbox" value="1"/>
+      <input class="w30" name="attr_int_save" title="@{int_save}" type="number" value="0"/>
+      <button class="txt-btn" name="roll_int_save" title="%{int_save}" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Intelligence Save}} @{show_name} {{[[d20+(@{int_save})]]=[[d20+(@{int_save})]]}} {{condition_note=@{condition_effects}}}">Intelligence</button>
+    </div>
+    <div class="rowflex nowrap">
+      <input name="attr_wis_save_c" type="checkbox" value="1"/>
+      <input class="w30" name="attr_wis_save" title="@{wis_save}" type="number" value="0"/>
+      <button class="txt-btn" name="roll_wis_save" title="%{wis_save}" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Wisdom Save}} @{show_name} {{[[d20+(@{wis_save})]]=[[d20+(@{wis_save})]]}} {{condition_note=@{condition_effects}}}">Wisdom</button>
+    </div>
+    <div class="rowflex nowrap">
+      <input name="attr_cha_save_c" type="checkbox" value="1"/>
+      <input class="w30" name="attr_cha_save" title="@{cha_save}" type="number" value="0"/>
+      <button class="txt-btn" name="roll_cha_save" title="%{cha_save}" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Charisma Save}} @{show_name} {{[[d20+(@{cha_save})]]=[[d20+(@{cha_save})]]}} {{condition_note=@{condition_effects}}}">Charisma</button>
     </div>
   </section>
   <section class="condition columnflex nowrap spaced">
@@ -246,253 +316,278 @@
       <input name="attr_condition" type="radio" value="6"/><span>Death</span>
     </div>
   </section>
-  <div class="prof rowflex nowrap">
-    <div class="section columnflex nowrap middle center">
-      <label class="wide" title="Proficiency Bonus">Prof Bonus</label>
-      <input class="stat w40" name="attr_prof" type="number" value="2" title="Proficiency Bonus: @{prof}"/>
-    </div>
-    <div class="section columnflex nowrap middle center init">
-      <button class="txt-btn" name="roll_init" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Initiative}} @{show_name} {{ Roll =[[@{init_dice}+(@{init}) &amp;{tracker}]]}}" title="%{init}">Initiative</button>
-      <input class="stat w40" name="attr_init" type="number" value="0" title="@{init}"/>
-    </div>
-    <div class="section columnflex nowrap middle center moxie">
-      <button class="txt-btn" name="roll_moxie" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Moxie}} @{show_name} {{ Roll =[[@{moxie_dice}+(@{moxie}) &amp;{tracker}]]}}" title="Social Initiative: %{moxie}">Moxie</button>
-      <input class="stat w40" name="attr_moxie" type="number" value="0" title="Social Initiative: @{moxie}"/>
-    </div>
-  </div>
-  <div class="ac rowflex nowrap">
-    <div class="section columnflex nowrap middle center">
-      <label class="wide">Armor Class</label>
-      <input class="stat w70" name="attr_ac" type="number" value="10" title="@{ac}"/>
-    </div>
-    <div class="section columnflex nowrap middle center">
-      <label class="wide">determination</label>
-      <div class="rowflex nowrap">
-        <input class="stat w40" name="attr_determination" type="number" value="2" title="@{determination}"/><span class="slash">/</span>
-        <input class="stat w40" name="attr_determination_max" type="number" value="2" title="@{determination|max}"/>
       </div>
+      <section class="inventory columnflex nowrap center">
+        <h4>Inventory</h4>
+        <input type="hidden" name="attr_inventory_bulk_total_display" value="0"/>
+        <input type="checkbox" name="attr_inventory_bulk_over_limit" value="1" style="display: none;"/>
+        <div class="inventory-header">
+          <span class="header-bulk">Bulk</span>
+          <span class="header-amount">Amount</span>
+          <span class="header-name">Name</span>
+        </div>
+        <fieldset class="repeating_inventory">
+          <div class="inventory-row">
+            <input name="attr_item_bulk" type="number" value="0" placeholder="0" title="Bulk"/>
+            <input name="attr_item_amount" type="number" value="1" placeholder="1" title="Amount"/>
+            <input name="attr_item_name" type="text" placeholder="Item name" title="Item name"/>
+          </div>
+        </fieldset>
+        <div class="inventory-footer">
+          <div class="bulk-total">
+            <span>Total Bulk: </span>
+            <span class="bulk-display">@{inventory_bulk_total_display}</span>
+            <span> / </span>
+            <span class="bulk-limit-display">@{bulk}</span>
+          </div>
+        </div>
+      </section>
     </div>
   </div>
-  <div class="speed rowflex nowrap">
-    <div class="section columnflex nowrap middle center">
-      <label class="bold txtcenter">Speed</label>
-      <input class="w70 stat" name="attr_speed" type="text" value="6m"/>
-    </div>
-    <div class="section death columnflex nowrap middle center">
-      <button class="txt-btn large" name="roll_deathsave" type="roll" value="@{whisper}&amp;{template:stargate} {{color=black}} {{title=Death Save}} @{show_name} {{Result=[[d20]]}}" title="%{deathsave}">Death Save</button>
-      <div class="rowflex nowrap gap5">
-        <input name="attr_death_success1" type="checkbox" value="1"/>
-        <input name="attr_death_success2" type="checkbox" value="1"/>
-        <input name="attr_death_success3" type="checkbox" value="1"/><span>Sucesses</span>
+  <input type="hidden" name="attr_condition_effects" value=""/>
+  <section class="weapons columnflex nowrap center">
+    <h2>Weapons</h2>
+    <div class="weapons-container">
+      <div class="weapon-box">
+        <div class="weapon-header">
+          <button name="roll_weapon1" type="roll" title="%{weapon1}" value="@{whisper}&amp;{template:stargate} {{title=@{weapon1_name}}} @{show_name} {{[[d20+(@{weapon1_modifier})]]=[[d20+(@{weapon1_modifier})]]}} {{Damage=[[@{weapon1_damage}]] @{weapon1_dmgtype} }} {{Range=@{weapon1_range_short}/@{weapon1_range_long}}} {{Magazine=@{weapon1_magazine}}} {{Reload=@{weapon1_reload}}} {{Tech Level=@{weapon1_techlevel}}} {{desc=@{weapon1_special} }} {{condition_note=@{condition_effects}}}"></button>
+          <input name="attr_weapon1_name" type="text" placeholder="Weapon Name"/>
+        </div>
+        <div class="weapon-row">
+          <div class="weapon-field">
+            <label>Modifier</label>
+            <input name="attr_weapon1_modifier" type="text" placeholder="+4"/>
+          </div>
+          <div class="weapon-field">
+            <label>Damage</label>
+            <input name="attr_weapon1_damage" type="text" placeholder="1d6"/>
+          </div>
+        </div>
+        <div class="weapon-row">
+          <div class="weapon-field">
+            <label>Type</label>
+            <input name="attr_weapon1_dmgtype" type="text" placeholder="piercing"/>
+          </div>
+          <div class="weapon-field">
+            <label>Tech Level</label>
+            <input name="attr_weapon1_techlevel" type="text" placeholder="4"/>
+          </div>
+        </div>
+        <div class="weapon-field weapon-range">
+          <label>Range (Short/Long)</label>
+          <div class="range-inputs">
+            <input name="attr_weapon1_range_short" type="text" placeholder="50"/>
+            <span>/</span>
+            <input name="attr_weapon1_range_long" type="text" placeholder="100"/>
+          </div>
+        </div>
+        <div class="weapon-row">
+          <div class="weapon-field">
+            <label>Ammo Cap</label>
+            <input name="attr_weapon1_magazine" type="number" placeholder="15"/>
+          </div>
+          <div class="weapon-field">
+            <label>Reload</label>
+            <input name="attr_weapon1_reload" type="text" placeholder="1 turn"/>
+          </div>
+        </div>
+        <div class="weapon-field">
+          <label>Special</label>
+          <textarea name="attr_weapon1_special"></textarea>
+        </div>
       </div>
-      <div class="rowflex nowrap gap5">
-        <input name="attr_death_failure1" type="checkbox" value="1"/>
-        <input name="attr_death_failure2" type="checkbox" value="1"/>
-        <input name="attr_death_failure3" type="checkbox" value="1"/><span class="pad">Failures</span>
+      <div class="weapon-box">
+        <div class="weapon-header">
+          <button name="roll_weapon2" type="roll" title="%{weapon2}" value="@{whisper}&amp;{template:stargate} {{title=@{weapon2_name}}} @{show_name} {{[[d20+(@{weapon2_modifier})]]=[[d20+(@{weapon2_modifier})]]}} {{Damage=[[@{weapon2_damage}]] @{weapon2_dmgtype} }} {{Range=@{weapon2_range_short}/@{weapon2_range_long}}} {{Magazine=@{weapon2_magazine}}} {{Reload=@{weapon2_reload}}} {{Tech Level=@{weapon2_techlevel}}} {{desc=@{weapon2_special} }} {{condition_note=@{condition_effects}}}"></button>
+          <input name="attr_weapon2_name" type="text" placeholder="Weapon Name"/>
+        </div>
+        <div class="weapon-row">
+          <div class="weapon-field">
+            <label>Modifier</label>
+            <input name="attr_weapon2_modifier" type="text" placeholder="+4"/>
+          </div>
+          <div class="weapon-field">
+            <label>Damage</label>
+            <input name="attr_weapon2_damage" type="text" placeholder="1d6"/>
+          </div>
+        </div>
+        <div class="weapon-row">
+          <div class="weapon-field">
+            <label>Type</label>
+            <input name="attr_weapon2_dmgtype" type="text" placeholder="piercing"/>
+          </div>
+          <div class="weapon-field">
+            <label>Tech Level</label>
+            <input name="attr_weapon2_techlevel" type="text" placeholder="4"/>
+          </div>
+        </div>
+        <div class="weapon-field weapon-range">
+          <label>Range (Short/Long)</label>
+          <div class="range-inputs">
+            <input name="attr_weapon2_range_short" type="text" placeholder="50"/>
+            <span>/</span>
+            <input name="attr_weapon2_range_long" type="text" placeholder="100"/>
+          </div>
+        </div>
+        <div class="weapon-row">
+          <div class="weapon-field">
+            <label>Ammo Cap</label>
+            <input name="attr_weapon2_magazine" type="number" placeholder="15"/>
+          </div>
+          <div class="weapon-field">
+            <label>Reload</label>
+            <input name="attr_weapon2_reload" type="text" placeholder="1 turn"/>
+          </div>
+        </div>
+        <div class="weapon-field">
+          <label>Special</label>
+          <textarea name="attr_weapon2_special"></textarea>
+        </div>
       </div>
-    </div>
-  </div>
-  <section class="saves columnflex nowrap">
-    <h3>Saves</h3>
-    <div class="rowflex nowrap">
-      <input name="attr_str_save_c" type="checkbox" value="1"/>
-      <input class="w30" name="attr_str_save" title="@{str_save}" type="number" value="0"/>
-      <button class="txt-btn" name="roll_str_save" title="%{str_save}" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Strength Save}} @{show_name} {{[[d20+(@{str_save})]]=[[d20+(@{str_save})]]}}">Strength</button>
-    </div>
-    <div class="rowflex nowrap">
-      <input name="attr_dex_save_c" type="checkbox" value="1"/>
-      <input class="w30" name="attr_dex_save" title="@{dex_save}" type="number" value="0"/>
-      <button class="txt-btn" name="roll_dex_save" title="%{dex_save}" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Dexterity Save}} @{show_name} {{[[d20+(@{dex_save})]]=[[d20+(@{dex_save})]]}}">Dexterity</button>
-    </div>
-    <div class="rowflex nowrap">
-      <input name="attr_con_save_c" type="checkbox" value="1"/>
-      <input class="w30" name="attr_con_save" title="@{con_save}" type="number" value="0"/>
-      <button class="txt-btn" name="roll_con_save" title="%{con_save}" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Constitution Save}} @{show_name} {{[[d20+(@{con_save})]]=[[d20+(@{con_save})]]}}">Constitution</button>
-    </div>
-    <div class="rowflex nowrap">
-      <input name="attr_int_save_c" type="checkbox" value="1"/>
-      <input class="w30" name="attr_int_save" title="@{int_save}" type="number" value="0"/>
-      <button class="txt-btn" name="roll_int_save" title="%{int_save}" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Intelligence Save}} @{show_name} {{[[d20+(@{int_save})]]=[[d20+(@{int_save})]]}}">Intelligence</button>
-    </div>
-    <div class="rowflex nowrap">
-      <input name="attr_wis_save_c" type="checkbox" value="1"/>
-      <input class="w30" name="attr_wis_save" title="@{wis_save}" type="number" value="0"/>
-      <button class="txt-btn" name="roll_wis_save" title="%{wis_save}" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Wisdom Save}} @{show_name} {{[[d20+(@{wis_save})]]=[[d20+(@{wis_save})]]}}">Wisdom</button>
-    </div>
-    <div class="rowflex nowrap">
-      <input name="attr_cha_save_c" type="checkbox" value="1"/>
-      <input class="w30" name="attr_cha_save" title="@{cha_save}" type="number" value="0"/>
-      <button class="txt-btn" name="roll_cha_save" title="%{cha_save}" type="roll" value="@{whisper}&amp;{template:stargate} {{title=Charisma Save}} @{show_name} {{[[d20+(@{cha_save})]]=[[d20+(@{cha_save})]]}}">Charisma</button>
-    </div>
-  </section>
-  <div class="bulk rowflex nowrap middle center">
-    <div class="section columnflex nowrap middle center">
-      <h3 title="@{bulk}">Bulk</h3>
-      <input class="stat w40" name="attr_bulk" type="number" value="8" title="@{bulk}"/>
-    </div>
-    <div class="section columnflex nowrap middle center">
-      <h5 title="@{perception_passive}">Passive Perception</h5>
-      <input class="stat w40" name="attr_perception_passive" type="number" value="" title="@{perception_passive}"/>
-    </div>
-  </div>
-  <section class="inventory columnflex nowrap center">
-    <h4>Inventory</h4>
-    <textarea name="attr_inventory" title="@{inventory}"></textarea>
-  </section>
-  <section class="attacks"><span class="name bold">Attack/Action Name</span><span class="bold">to hit</span><span class="bold pl20">dmg</span><span class="bold dmg-type">type</span><span class="bold">range</span><span class="bold">Cap/Reload</span><span class="bold pl20">special</span>
-    <div class="rowflex nowrap">
-      <button name="roll_attack1" type="roll" title="%{attack1}" value="@{whisper}&amp;{template:stargate} {{title=@{attack1}}} @{show_name} {{[[d20+(@{attack1_to_hit})]]=[[d20+(@{attack1_to_hit})]]}} {{Damage=[[@{attack1_dmg}+0]] @{attack1_dmgtype} }} {{desc=@{attack1_special} }}"></button>
-      <input class="ml15" name="attr_attack1" type="text" placeholder="Sidearm(Beretta M9)"/>
-    </div>
-    <div>
-      <input class="w40" name="attr_attack1_to_hit" type="text" placeholder="4"/>
-    </div>
-    <div>
-      <input class="w70 mr15" name="attr_attack1_dmg" type="text" placeholder="1d6"/>
-    </div>
-    <div>
-      <input class="w50" name="attr_attack1_dmgtype" type="text" placeholder="piercing"/>
-    </div>
-    <div>
-      <input class="w50" name="attr_attack1_range" type="text" placeholder="50/100"/>
-    </div>
-    <div>
-      <input class="w50" name="attr_attack1_reload" type="text" placeholder="15/1"/>
-    </div>
-    <div>
-      <input class="w110 mr15" name="attr_attack1_special" type="text"/>
-    </div>
-    <div class="rowflex nowrap">
-      <button name="roll_attack2" type="roll" title="%{attack2}" value="@{whisper}&amp;{template:stargate} {{title=@{attack2}}} @{show_name} {{[[d20+(@{attack2_to_hit})]]=[[d20+(@{attack2_to_hit})]]}} {{Damage=[[@{attack2_dmg}+0]] @{attack2_dmgtype} }} {{desc=@{attack2_special} }}"></button>
-      <input class="ml15" name="attr_attack2" type="text" placeholder="Sidearm(Beretta M9)"/>
-    </div>
-    <div>
-      <input class="w40" name="attr_attack2_to_hit" type="text" placeholder="4"/>
-    </div>
-    <div>
-      <input class="w70 mr15" name="attr_attack2_dmg" type="text" placeholder="1d6"/>
-    </div>
-    <div>
-      <input class="w50" name="attr_attack2_dmgtype" type="text" placeholder="piercing"/>
-    </div>
-    <div>
-      <input class="w50" name="attr_attack2_range" type="text" placeholder="50/100"/>
-    </div>
-    <div>
-      <input class="w50" name="attr_attack2_reload" type="text" placeholder="15/1"/>
-    </div>
-    <div>
-      <input class="w110 mr15" name="attr_attack2_special" type="text"/>
-    </div>
-    <div class="rowflex nowrap">
-      <button name="roll_attack3" type="roll" title="%{attack3}" value="@{whisper}&amp;{template:stargate} {{title=@{attack3}}} @{show_name} {{[[d20+(@{attack3_to_hit})]]=[[d20+(@{attack3_to_hit})]]}} {{Damage=[[@{attack3_dmg}+0]] @{attack3_dmgtype} }} {{desc=@{attack3_special} }}"></button>
-      <input class="ml15" name="attr_attack3" type="text" placeholder="Sidearm(Beretta M9)"/>
-    </div>
-    <div>
-      <input class="w40" name="attr_attack3_to_hit" type="text" placeholder="4"/>
-    </div>
-    <div>
-      <input class="w70 mr15" name="attr_attack3_dmg" type="text" placeholder="1d6"/>
-    </div>
-    <div>
-      <input class="w50" name="attr_attack3_dmgtype" type="text" placeholder="piercing"/>
-    </div>
-    <div>
-      <input class="w50" name="attr_attack3_range" type="text" placeholder="50/100"/>
-    </div>
-    <div>
-      <input class="w50" name="attr_attack3_reload" type="text" placeholder="15/1"/>
-    </div>
-    <div>
-      <input class="w110 mr15" name="attr_attack3_special" type="text"/>
-    </div>
-    <div class="rowflex nowrap">
-      <button name="roll_attack4" type="roll" title="%{attack4}" value="@{whisper}&amp;{template:stargate} {{title=@{attack4}}} @{show_name} {{[[d20+(@{attack4_to_hit})]]=[[d20+(@{attack4_to_hit})]]}} {{Damage=[[@{attack4_dmg}+0]] @{attack4_dmgtype} }} {{desc=@{attack4_special} }}"></button>
-      <input class="ml15" name="attr_attack4" type="text" placeholder="Sidearm(Beretta M9)"/>
-    </div>
-    <div>
-      <input class="w40" name="attr_attack4_to_hit" type="text" placeholder="4"/>
-    </div>
-    <div>
-      <input class="w70 mr15" name="attr_attack4_dmg" type="text" placeholder="1d6"/>
-    </div>
-    <div>
-      <input class="w50" name="attr_attack4_dmgtype" type="text" placeholder="piercing"/>
-    </div>
-    <div>
-      <input class="w50" name="attr_attack4_range" type="text" placeholder="50/100"/>
-    </div>
-    <div>
-      <input class="w50" name="attr_attack4_reload" type="text" placeholder="15/1"/>
-    </div>
-    <div>
-      <input class="w110 mr15" name="attr_attack4_special" type="text"/>
-    </div>
-    <div class="rowflex nowrap">
-      <button name="roll_attack5" type="roll" title="%{attack5}" value="@{whisper}&amp;{template:stargate} {{title=@{attack5}}} @{show_name} {{[[d20+(@{attack5_to_hit})]]=[[d20+(@{attack5_to_hit})]]}} {{Damage=[[@{attack5_dmg}+0]] @{attack5_dmgtype} }} {{desc=@{attack5_special} }}"></button>
-      <input class="ml15" name="attr_attack5" type="text" placeholder="Sidearm(Beretta M9)"/>
-    </div>
-    <div>
-      <input class="w40" name="attr_attack5_to_hit" type="text" placeholder="4"/>
-    </div>
-    <div>
-      <input class="w70 mr15" name="attr_attack5_dmg" type="text" placeholder="1d6"/>
-    </div>
-    <div>
-      <input class="w50" name="attr_attack5_dmgtype" type="text" placeholder="piercing"/>
-    </div>
-    <div>
-      <input class="w50" name="attr_attack5_range" type="text" placeholder="50/100"/>
-    </div>
-    <div>
-      <input class="w50" name="attr_attack5_reload" type="text" placeholder="15/1"/>
-    </div>
-    <div>
-      <input class="w110 mr15" name="attr_attack5_special" type="text"/>
-    </div>
-    <div class="rowflex nowrap">
-      <button name="roll_attack6" type="roll" title="%{attack6}" value="@{whisper}&amp;{template:stargate} {{title=@{attack6}}} @{show_name} {{[[d20+(@{attack6_to_hit})]]=[[d20+(@{attack6_to_hit})]]}} {{Damage=[[@{attack6_dmg}+0]] @{attack6_dmgtype} }} {{desc=@{attack6_special} }}"></button>
-      <input class="ml15" name="attr_attack6" type="text" placeholder="Sidearm(Beretta M9)"/>
-    </div>
-    <div>
-      <input class="w40" name="attr_attack6_to_hit" type="text" placeholder="4"/>
-    </div>
-    <div>
-      <input class="w70 mr15" name="attr_attack6_dmg" type="text" placeholder="1d6"/>
-    </div>
-    <div>
-      <input class="w50" name="attr_attack6_dmgtype" type="text" placeholder="piercing"/>
-    </div>
-    <div>
-      <input class="w50" name="attr_attack6_range" type="text" placeholder="50/100"/>
-    </div>
-    <div>
-      <input class="w50" name="attr_attack6_reload" type="text" placeholder="15/1"/>
-    </div>
-    <div>
-      <input class="w110 mr15" name="attr_attack6_special" type="text"/>
-    </div>
-    <div class="rowflex nowrap">
-      <button name="roll_attack7" type="roll" title="%{attack7}" value="@{whisper}&amp;{template:stargate} {{title=@{attack7}}} @{show_name} {{[[d20+(@{attack7_to_hit})]]=[[d20+(@{attack7_to_hit})]]}} {{Damage=[[@{attack7_dmg}+0]] @{attack7_dmgtype} }} {{desc=@{attack7_special} }}"></button>
-      <input class="ml15" name="attr_attack7" type="text" placeholder="Sidearm(Beretta M9)"/>
-    </div>
-    <div>
-      <input class="w40" name="attr_attack7_to_hit" type="text" placeholder="4"/>
-    </div>
-    <div>
-      <input class="w70 mr15" name="attr_attack7_dmg" type="text" placeholder="1d6"/>
-    </div>
-    <div>
-      <input class="w50" name="attr_attack7_dmgtype" type="text" placeholder="piercing"/>
-    </div>
-    <div>
-      <input class="w50" name="attr_attack7_range" type="text" placeholder="50/100"/>
-    </div>
-    <div>
-      <input class="w50" name="attr_attack7_reload" type="text" placeholder="15/1"/>
-    </div>
-    <div>
-      <input class="w110 mr15" name="attr_attack7_special" type="text"/>
+      <div class="weapon-box">
+        <div class="weapon-header">
+          <button name="roll_weapon3" type="roll" title="%{weapon3}" value="@{whisper}&amp;{template:stargate} {{title=@{weapon3_name}}} @{show_name} {{[[d20+(@{weapon3_modifier})]]=[[d20+(@{weapon3_modifier})]]}} {{Damage=[[@{weapon3_damage}]] @{weapon3_dmgtype} }} {{Range=@{weapon3_range_short}/@{weapon3_range_long}}} {{Magazine=@{weapon3_magazine}}} {{Reload=@{weapon3_reload}}} {{Tech Level=@{weapon3_techlevel}}} {{desc=@{weapon3_special} }} {{condition_note=@{condition_effects}}}"></button>
+          <input name="attr_weapon3_name" type="text" placeholder="Weapon Name"/>
+        </div>
+        <div class="weapon-row">
+          <div class="weapon-field">
+            <label>Modifier</label>
+            <input name="attr_weapon3_modifier" type="text" placeholder="+4"/>
+          </div>
+          <div class="weapon-field">
+            <label>Damage</label>
+            <input name="attr_weapon3_damage" type="text" placeholder="1d6"/>
+          </div>
+        </div>
+        <div class="weapon-row">
+          <div class="weapon-field">
+            <label>Type</label>
+            <input name="attr_weapon3_dmgtype" type="text" placeholder="piercing"/>
+          </div>
+          <div class="weapon-field">
+            <label>Tech Level</label>
+            <input name="attr_weapon3_techlevel" type="text" placeholder="4"/>
+          </div>
+        </div>
+        <div class="weapon-field weapon-range">
+          <label>Range (Short/Long)</label>
+          <div class="range-inputs">
+            <input name="attr_weapon3_range_short" type="text" placeholder="50"/>
+            <span>/</span>
+            <input name="attr_weapon3_range_long" type="text" placeholder="100"/>
+          </div>
+        </div>
+        <div class="weapon-row">
+          <div class="weapon-field">
+            <label>Ammo Cap</label>
+            <input name="attr_weapon3_magazine" type="number" placeholder="15"/>
+          </div>
+          <div class="weapon-field">
+            <label>Reload</label>
+            <input name="attr_weapon3_reload" type="text" placeholder="1 turn"/>
+          </div>
+        </div>
+        <div class="weapon-field">
+          <label>Special</label>
+          <textarea name="attr_weapon3_special"></textarea>
+        </div>
+      </div>
+      <div class="weapon-box">
+        <div class="weapon-header">
+          <button name="roll_weapon4" type="roll" title="%{weapon4}" value="@{whisper}&amp;{template:stargate} {{title=@{weapon4_name}}} @{show_name} {{[[d20+(@{weapon4_modifier})]]=[[d20+(@{weapon4_modifier})]]}} {{Damage=[[@{weapon4_damage}]] @{weapon4_dmgtype} }} {{Range=@{weapon4_range_short}/@{weapon4_range_long}}} {{Magazine=@{weapon4_magazine}}} {{Reload=@{weapon4_reload}}} {{Tech Level=@{weapon4_techlevel}}} {{desc=@{weapon4_special} }} {{condition_note=@{condition_effects}}}"></button>
+          <input name="attr_weapon4_name" type="text" placeholder="Weapon Name"/>
+        </div>
+        <div class="weapon-row">
+          <div class="weapon-field">
+            <label>Modifier</label>
+            <input name="attr_weapon4_modifier" type="text" placeholder="+4"/>
+          </div>
+          <div class="weapon-field">
+            <label>Damage</label>
+            <input name="attr_weapon4_damage" type="text" placeholder="1d6"/>
+          </div>
+        </div>
+        <div class="weapon-row">
+          <div class="weapon-field">
+            <label>Type</label>
+            <input name="attr_weapon4_dmgtype" type="text" placeholder="piercing"/>
+          </div>
+          <div class="weapon-field">
+            <label>Tech Level</label>
+            <input name="attr_weapon4_techlevel" type="text" placeholder="4"/>
+          </div>
+        </div>
+        <div class="weapon-field weapon-range">
+          <label>Range (Short/Long)</label>
+          <div class="range-inputs">
+            <input name="attr_weapon4_range_short" type="text" placeholder="50"/>
+            <span>/</span>
+            <input name="attr_weapon4_range_long" type="text" placeholder="100"/>
+          </div>
+        </div>
+        <div class="weapon-row">
+          <div class="weapon-field">
+            <label>Ammo Cap</label>
+            <input name="attr_weapon4_magazine" type="number" placeholder="15"/>
+          </div>
+          <div class="weapon-field">
+            <label>Reload</label>
+            <input name="attr_weapon4_reload" type="text" placeholder="1 turn"/>
+          </div>
+        </div>
+        <div class="weapon-field">
+          <label>Special</label>
+          <textarea name="attr_weapon4_special"></textarea>
+        </div>
+      </div>
+      <div class="weapon-box">
+        <div class="weapon-header">
+          <button name="roll_weapon5" type="roll" title="%{weapon5}" value="@{whisper}&amp;{template:stargate} {{title=@{weapon5_name}}} @{show_name} {{[[d20+(@{weapon5_modifier})]]=[[d20+(@{weapon5_modifier})]]}} {{Damage=[[@{weapon5_damage}]] @{weapon5_dmgtype} }} {{Range=@{weapon5_range_short}/@{weapon5_range_long}}} {{Magazine=@{weapon5_magazine}}} {{Reload=@{weapon5_reload}}} {{Tech Level=@{weapon5_techlevel}}} {{desc=@{weapon5_special} }} {{condition_note=@{condition_effects}}}"></button>
+          <input name="attr_weapon5_name" type="text" placeholder="Weapon Name"/>
+        </div>
+        <div class="weapon-row">
+          <div class="weapon-field">
+            <label>Modifier</label>
+            <input name="attr_weapon5_modifier" type="text" placeholder="+4"/>
+          </div>
+          <div class="weapon-field">
+            <label>Damage</label>
+            <input name="attr_weapon5_damage" type="text" placeholder="1d6"/>
+          </div>
+        </div>
+        <div class="weapon-row">
+          <div class="weapon-field">
+            <label>Type</label>
+            <input name="attr_weapon5_dmgtype" type="text" placeholder="piercing"/>
+          </div>
+          <div class="weapon-field">
+            <label>Tech Level</label>
+            <input name="attr_weapon5_techlevel" type="text" placeholder="4"/>
+          </div>
+        </div>
+        <div class="weapon-field weapon-range">
+          <label>Range (Short/Long)</label>
+          <div class="range-inputs">
+            <input name="attr_weapon5_range_short" type="text" placeholder="50"/>
+            <span>/</span>
+            <input name="attr_weapon5_range_long" type="text" placeholder="100"/>
+          </div>
+        </div>
+        <div class="weapon-row">
+          <div class="weapon-field">
+            <label>Ammo Cap</label>
+            <input name="attr_weapon5_magazine" type="number" placeholder="15"/>
+          </div>
+          <div class="weapon-field">
+            <label>Reload</label>
+            <input name="attr_weapon5_reload" type="text" placeholder="1 turn"/>
+          </div>
+        </div>
+        <div class="weapon-field">
+          <label>Special</label>
+          <textarea name="attr_weapon5_special"></textarea>
+        </div>
+      </div>
     </div>
   </section>
 </main>
@@ -571,9 +666,9 @@
       </select>
     </div>
     <div class="rowflex nowrap">
-      <button name="roll_shortrest" type="roll" title="%{shortrest}" value="@{whisper}&amp;{template:stargate} {{color=green}} {{title=Short Rest}} @{show_name} !modbattr --silent --name @{character_name} --hp|{{Healing=[[@{hd}]]}}!!! {{desc=One roll of the Hit Dice.}}">Short Rest</button>
-      <button name="roll_longrest" type="roll" title="%{longrest}" value="@{whisper}&amp;{template:stargate} {{color=green}} {{title=Long Rest}} @{show_name}  !modbattr --silent --name @{character_name} --hp|{{Healing=[[@{rank}@{hd}]]}}!!! {{desc=Rolls a number of Hit Dice equal to the characters level, and recovers that amount of health. }}">Long Rest</button>
-      <button name="roll_td" type="roll" title="%{td}" value="@{whisper}&amp;{template:stargate} {{title=Tension Die (@{td})}} @{show_name}  {{Roll=[[@{td}]]}} {{desc=Rolls the current tension die for the episode. }}">Tension Dice</button>
+      <button name="roll_shortrest" type="roll" title="%{shortrest}" value="@{whisper}&amp;{template:stargate} {{color=green}} {{title=Short Rest}} @{show_name} !modbattr --silent --name @{character_name} --hp|{{Healing=[[@{hd}]]}}!!! {{desc=One roll of the Hit Dice.}} {{condition_note=@{condition_effects}}}">Short Rest</button>
+      <button name="roll_longrest" type="roll" title="%{longrest}" value="@{whisper}&amp;{template:stargate} {{color=green}} {{title=Long Rest}} @{show_name}  !modbattr --silent --name @{character_name} --hp|{{Healing=[[@{rank}@{hd}]]}}!!! {{desc=Rolls a number of Hit Dice equal to the characters level, and recovers that amount of health. }} {{condition_note=@{condition_effects}}}">Long Rest</button>
+      <button name="roll_td" type="roll" title="%{td}" value="@{whisper}&amp;{template:stargate} {{title=Tension Die (@{td})}} @{show_name}  {{Roll=[[@{td}]]}} {{desc=Rolls the current tension die for the episode. }} {{condition_note=@{condition_effects}}}">Tension Dice</button>
     </div>
     <div class="rowflex nowrap">
       <h3>Custom roll</h3>
@@ -605,49 +700,162 @@
       <textarea class="dmg" name="attr_ability_damage"></textarea>
     </div>
   </section>
-  <section class="changelog columnflex nowrap center">
-    <button class="txt-btn" name="roll_help" type="roll" value="@{whisper}&amp;{template:stargate} {{title=[(Link)Sheet Userguide](https://wiki.roll20.net/Stargate) }} {{subtitle=Roll20 Wiki}} {{desc=  (Right-click to open in a new tab)
-**Official Stargate RPG**
-**Roll20 Character Sheet**
- created by **Andreas J.**([@anduh_](https://twitter.com/anduh_)) }}">Sheet Documentation</button><br/>
-    <h1>Changelog</h1>
-    <label>v.1.76 (Sept 30th)</label><span>• add passive perception(next to bulk)</span>
-    <label>v.1.75 (Sept 7th)</label><span>• Moved Eureka Points to main page. Shown to Scientists by default, setting option to always show it<br/>• Added HD & TD buttons to main page, changed HD to dropdown<br/>• rearrange WIS & INT to correct order<br/>• minor visual fixes</span>
-    <label>v.1.74 (Aug 30th)</label><span>• Add adv./disadv. options to Init & moxie rolls<br/>• Add 6th & 7th weapon slot</span>
-    <label>v.1.73 (Aug 9th)</label><span>• Remove History Skill (was skill in old beta rules)</span>
-    <label>v.1.72 (June)</label><span>• code refactor<br/>      • page navigation made always visible</span>
-    <label>v.1.70 (May)</label><span>• replace page buttons<br/>      • add datalists for race, origin, class<br/>      • refactor sheet in PUG &amp; SCSS<br/>      • update the sheet to work with CSE</span>
+  <section class="attacks"><span class="name bold">Attack/Action Name</span><span class="bold">to hit</span><span class="bold pl20">dmg</span><span class="bold dmg-type">type</span><span class="bold">range</span><span class="bold">Cap/Reload</span><span class="bold pl20">special</span>
+    <div class="rowflex nowrap">
+      <button name="roll_attack1" type="roll" title="%{attack1}" value="@{whisper}&amp;{template:stargate} {{title=@{attack1}}} @{show_name} {{[[d20+(@{attack1_to_hit})]]=[[d20+(@{attack1_to_hit})]]}} {{Damage=[[@{attack1_dmg}+0]] @{attack1_dmgtype} }} {{desc=@{attack1_special} }} {{condition_note=@{condition_effects}}}"></button>
+      <input class="ml15" name="attr_attack1" type="text" placeholder="Sidearm(Beretta M9)"/>
+    </div>
+    <div>
+      <input class="w40" name="attr_attack1_to_hit" type="text" placeholder="4"/>
+    </div>
+    <div>
+      <input class="w70 mr15" name="attr_attack1_dmg" type="text" placeholder="1d6"/>
+    </div>
+    <div>
+      <input class="w50" name="attr_attack1_dmgtype" type="text" placeholder="piercing"/>
+    </div>
+    <div>
+      <input class="w50" name="attr_attack1_range" type="text" placeholder="50/100"/>
+    </div>
+    <div>
+      <input class="w50" name="attr_attack1_reload" type="text" placeholder="15/1"/>
+    </div>
+    <div>
+      <input class="w110 mr15" name="attr_attack1_special" type="text"/>
+    </div>
+    <div class="rowflex nowrap">
+      <button name="roll_attack2" type="roll" title="%{attack2}" value="@{whisper}&amp;{template:stargate} {{title=@{attack2}}} @{show_name} {{[[d20+(@{attack2_to_hit})]]=[[d20+(@{attack2_to_hit})]]}} {{Damage=[[@{attack2_dmg}+0]] @{attack2_dmgtype} }} {{desc=@{attack2_special} }} {{condition_note=@{condition_effects}}}"></button>
+      <input class="ml15" name="attr_attack2" type="text" placeholder="Sidearm(Beretta M9)"/>
+    </div>
+    <div>
+      <input class="w40" name="attr_attack2_to_hit" type="text" placeholder="4"/>
+    </div>
+    <div>
+      <input class="w70 mr15" name="attr_attack2_dmg" type="text" placeholder="1d6"/>
+    </div>
+    <div>
+      <input class="w50" name="attr_attack2_dmgtype" type="text" placeholder="piercing"/>
+    </div>
+    <div>
+      <input class="w50" name="attr_attack2_range" type="text" placeholder="50/100"/>
+    </div>
+    <div>
+      <input class="w50" name="attr_attack2_reload" type="text" placeholder="15/1"/>
+    </div>
+    <div>
+      <input class="w110 mr15" name="attr_attack2_special" type="text"/>
+    </div>
+    <div class="rowflex nowrap">
+      <button name="roll_attack3" type="roll" title="%{attack3}" value="@{whisper}&amp;{template:stargate} {{title=@{attack3}}} @{show_name} {{[[d20+(@{attack3_to_hit})]]=[[d20+(@{attack3_to_hit})]]}} {{Damage=[[@{attack3_dmg}+0]] @{attack3_dmgtype} }} {{desc=@{attack3_special} }} {{condition_note=@{condition_effects}}}"></button>
+      <input class="ml15" name="attr_attack3" type="text" placeholder="Sidearm(Beretta M9)"/>
+    </div>
+    <div>
+      <input class="w40" name="attr_attack3_to_hit" type="text" placeholder="4"/>
+    </div>
+    <div>
+      <input class="w70 mr15" name="attr_attack3_dmg" type="text" placeholder="1d6"/>
+    </div>
+    <div>
+      <input class="w50" name="attr_attack3_dmgtype" type="text" placeholder="piercing"/>
+    </div>
+    <div>
+      <input class="w50" name="attr_attack3_range" type="text" placeholder="50/100"/>
+    </div>
+    <div>
+      <input class="w50" name="attr_attack3_reload" type="text" placeholder="15/1"/>
+    </div>
+    <div>
+      <input class="w110 mr15" name="attr_attack3_special" type="text"/>
+    </div>
+    <div class="rowflex nowrap">
+      <button name="roll_attack4" type="roll" title="%{attack4}" value="@{whisper}&amp;{template:stargate} {{title=@{attack4}}} @{show_name} {{[[d20+(@{attack4_to_hit})]]=[[d20+(@{attack4_to_hit})]]}} {{Damage=[[@{attack4_dmg}+0]] @{attack4_dmgtype} }} {{desc=@{attack4_special} }} {{condition_note=@{condition_effects}}}"></button>
+      <input class="ml15" name="attr_attack4" type="text" placeholder="Sidearm(Beretta M9)"/>
+    </div>
+    <div>
+      <input class="w40" name="attr_attack4_to_hit" type="text" placeholder="4"/>
+    </div>
+    <div>
+      <input class="w70 mr15" name="attr_attack4_dmg" type="text" placeholder="1d6"/>
+    </div>
+    <div>
+      <input class="w50" name="attr_attack4_dmgtype" type="text" placeholder="piercing"/>
+    </div>
+    <div>
+      <input class="w50" name="attr_attack4_range" type="text" placeholder="50/100"/>
+    </div>
+    <div>
+      <input class="w50" name="attr_attack4_reload" type="text" placeholder="15/1"/>
+    </div>
+    <div>
+      <input class="w110 mr15" name="attr_attack4_special" type="text"/>
+    </div>
+    <div class="rowflex nowrap">
+      <button name="roll_attack5" type="roll" title="%{attack5}" value="@{whisper}&amp;{template:stargate} {{title=@{attack5}}} @{show_name} {{[[d20+(@{attack5_to_hit})]]=[[d20+(@{attack5_to_hit})]]}} {{Damage=[[@{attack5_dmg}+0]] @{attack5_dmgtype} }} {{desc=@{attack5_special} }} {{condition_note=@{condition_effects}}}"></button>
+      <input class="ml15" name="attr_attack5" type="text" placeholder="Sidearm(Beretta M9)"/>
+    </div>
+    <div>
+      <input class="w40" name="attr_attack5_to_hit" type="text" placeholder="4"/>
+    </div>
+    <div>
+      <input class="w70 mr15" name="attr_attack5_dmg" type="text" placeholder="1d6"/>
+    </div>
+    <div>
+      <input class="w50" name="attr_attack5_dmgtype" type="text" placeholder="piercing"/>
+    </div>
+    <div>
+      <input class="w50" name="attr_attack5_range" type="text" placeholder="50/100"/>
+    </div>
+    <div>
+      <input class="w50" name="attr_attack5_reload" type="text" placeholder="15/1"/>
+    </div>
+    <div>
+      <input class="w110 mr15" name="attr_attack5_special" type="text"/>
+    </div>
+    <div class="rowflex nowrap">
+      <button name="roll_attack6" type="roll" title="%{attack6}" value="@{whisper}&amp;{template:stargate} {{title=@{attack6}}} @{show_name} {{[[d20+(@{attack6_to_hit})]]=[[d20+(@{attack6_to_hit})]]}} {{Damage=[[@{attack6_dmg}+0]] @{attack6_dmgtype} }} {{desc=@{attack6_special} }} {{condition_note=@{condition_effects}}}"></button>
+      <input class="ml15" name="attr_attack6" type="text" placeholder="Sidearm(Beretta M9)"/>
+    </div>
+    <div>
+      <input class="w40" name="attr_attack6_to_hit" type="text" placeholder="4"/>
+    </div>
+    <div>
+      <input class="w70 mr15" name="attr_attack6_dmg" type="text" placeholder="1d6"/>
+    </div>
+    <div>
+      <input class="w50" name="attr_attack6_dmgtype" type="text" placeholder="piercing"/>
+    </div>
+    <div>
+      <input class="w50" name="attr_attack6_range" type="text" placeholder="50/100"/>
+    </div>
+    <div>
+      <input class="w50" name="attr_attack6_reload" type="text" placeholder="15/1"/>
+    </div>
+    <div>
+      <input class="w110 mr15" name="attr_attack6_special" type="text"/>
+    </div>
+    <div class="rowflex nowrap">
+      <button name="roll_attack7" type="roll" title="%{attack7}" value="@{whisper}&amp;{template:stargate} {{title=@{attack7}}} @{show_name} {{[[d20+(@{attack7_to_hit})]]=[[d20+(@{attack7_to_hit})]]}} {{Damage=[[@{attack7_dmg}+0]] @{attack7_dmgtype} }} {{desc=@{attack7_special} }} {{condition_note=@{condition_effects}}}"></button>
+      <input class="ml15" name="attr_attack7" type="text" placeholder="Sidearm(Beretta M9)"/>
+    </div>
+    <div>
+      <input class="w40" name="attr_attack7_to_hit" type="text" placeholder="4"/>
+    </div>
+    <div>
+      <input class="w70 mr15" name="attr_attack7_dmg" type="text" placeholder="1d6"/>
+    </div>
+    <div>
+      <input class="w50" name="attr_attack7_dmgtype" type="text" placeholder="piercing"/>
+    </div>
+    <div>
+      <input class="w50" name="attr_attack7_range" type="text" placeholder="50/100"/>
+    </div>
+    <div>
+      <input class="w50" name="attr_attack7_reload" type="text" placeholder="15/1"/>
+    </div>
+    <div>
+      <input class="w110 mr15" name="attr_attack7_special" type="text"/>
+    </div>
   </section>
-  <div class="ammo">
-    <div class="section columnflex nowrap">
-      <label class="other">Living Series</label>
-      <div class="rowflex nowrap"><span>Stargaterpg.com username</span>
-        <input class="w40" name="attr_living_series_user" type="text" placeholder="" value="" style="width:100px"/><span title="You can see your Roll20 id by going to your Roll20 profile page, and copying the numbers in the URL">Roll20 ID</span>
-        <input class="w40" name="attr_roll20id" type="text" style="width:100px" title="You can see your Roll20 id by going to your Roll20 profile page, and copying the numbers in the URL" value=""/>
-      </div>
-      <div class="rowflex nowrap"><span>Stargaterpg.com character link</span>
-        <input class="w40" name="attr_cahracter_link" type="text" style="width:350px" placeholder="The url to your character sheet" value=""/>
-      </div>
-    </div>
-    <div class="ammo grid">
-      <div class="section columnflex nowrap middle center">
-        <label>Ammo Weapon 1</label>
-        <input name="attr_ammo1" type="number" value="0"/>
-      </div>
-      <div class="section columnflex nowrap middle center">
-        <label>Ammo Weapon 2</label>
-        <input name="attr_ammo2" type="number" value="0"/>
-      </div>
-      <div class="section columnflex nowrap middle center">
-        <label>Ammo Weapon 3</label>
-        <input name="attr_ammo3" type="number" value="0"/>
-      </div>
-      <div class="section columnflex nowrap middle center">
-        <label>Ammo Weapon 4</label>
-        <input name="attr_ammo4" type="number" value="0"/>
-      </div>
-    </div>
-  </div>
 </main>
 <datalist id="race">
   <option value="Aturen">Aturen</option>
@@ -701,11 +909,13 @@
             {{#subtitle}}
       <div class="sheet-subtitle">{{subtitle}}</div>{{/subtitle}}
     </div>
-    <div class="sheet-content">{{#allprops() title subtitle desc color}}
+    <div class="sheet-content">{{#allprops() title subtitle desc color condition_note}}
       <div class="sheet-key">{{key}}</div>
-      <div class="sheet-value">{{value}}</div>      {{/allprops() title subtitle desc color}}
+      <div class="sheet-value">{{value}}</div>      {{/allprops() title subtitle desc color condition_note}}
             {{#desc}}
       <div class="sheet-desc">{{desc}}</div>{{/desc}}
+            {{#condition_note}}
+      <div class="sheet-condition-note">{{condition_note}}</div>{{/condition_note}}
     </div>
   </div>
 </rolltemplate>
@@ -1035,6 +1245,71 @@ statmods.forEach(statmod => {
 
         });
     });
+});
+
+// Condition Effects
+on("change:condition", function() {
+    getAttrs(["condition"], function(values) {
+        const condition = parseInt(values.condition) || 0;
+        let effectText = "";
+
+        if (condition === 1 || condition === 2) {
+            effectText = "Disadvantage on Skill Checks";
+        } else if (condition >= 3) {
+            effectText = "Disadvantage on Skill Checks, Saves and Attacks";
+        }
+
+        setAttrs({
+            condition_effects: effectText
+        });
+    });
+});
+
+// Inventory Management
+
+// Calculate total inventory bulk
+function calculateInventoryBulk() {
+    getSectionIDs("repeating_inventory", function(idArray) {
+        const attrNames = idArray.map(id => `repeating_inventory_${id}_item_bulk`);
+        attrNames.push("bulk");
+
+        getAttrs(attrNames, function(values) {
+            let totalBulk = 0;
+
+            idArray.forEach(function(id) {
+                const bulk = int(values[`repeating_inventory_${id}_item_bulk`]);
+                totalBulk += bulk;
+            });
+
+            const characterBulk = int(values.bulk) || 8;
+            const isOverLimit = totalBulk > characterBulk ? 1 : 0;
+
+            setAttrs({
+                inventory_bulk_total_display: totalBulk,
+                inventory_bulk_over_limit: isOverLimit
+            });
+        });
+    });
+}
+
+// Recalculate bulk when item bulk changes
+on("change:repeating_inventory:item_bulk", function() {
+    calculateInventoryBulk();
+});
+
+// Recalculate bulk when rows are added or removed
+on("remove:repeating_inventory", function() {
+    calculateInventoryBulk();
+});
+
+// Recalculate bulk when character bulk changes
+on("change:bulk", function() {
+    calculateInventoryBulk();
+});
+
+// Calculate bulk on sheet open
+on("sheet:opened", function() {
+    calculateInventoryBulk();
 });
 
 

@@ -1,3 +1,6 @@
+.charsheet {
+  background-color: black;
+}
 .charsheet input[type=range].progress-bar {
   width: 100px;
 }
@@ -185,16 +188,16 @@
 }
 .charsheet main.character {
   display: grid;
-  grid-template-columns: 4fr 8fr 5fr 6fr;
-  grid-template-rows: repeat(5, 2fr) 5fr 2fr 4fr;
-  grid-template-areas: "name name    name    name     " "attr skills  hp      condition" "attr skills  prof    condition" "attr skills  ac      condition" "attr skills  speed   bulk     " "attr skills  saves   inventory" "attr attacks attacks attacks  " ".    attacks attacks attacks  ";
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto auto auto auto;
   width: 850px;
-  height: 1200px;
+  min-height: 1000px;
   background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Stargate-RPG/images/bg.png");
   background-repeat: no-repeat;
   background-size: 700px 700px;
   background-position: center;
   background-color: black;
+  gap: 0;
 }
 .charsheet main.background {
   display: grid;
@@ -225,10 +228,10 @@
 .charsheet main.settings {
   display: grid;
   grid-template-columns: 1fr 1fr;
-  grid-template-rows: 3fr 2fr 3fr;
-  grid-template-areas: "settings other    " "settings changelog" "ammo     changelog";
+  grid-template-rows: auto auto;
+  grid-template-areas: "settings other" "attacks attacks";
   width: 840px;
-  height: 990px;
+  min-height: 990px;
   background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Stargate-RPG/images/bg.png");
   background-repeat: no-repeat;
   background-size: 700px 700px;
@@ -238,12 +241,6 @@
   padding: 5px;
 }
 .charsheet main.settings .settings label {
-  font-size: 1.4em;
-  font-weight: bold;
-  text-align: center;
-  width: 250px;
-}
-.charsheet main.settings .changelog label {
   font-size: 1.4em;
   font-weight: bold;
   text-align: center;
@@ -309,43 +306,106 @@
   width: 18px;
 }
 .charsheet section.name {
-  grid-area: name;
-  padding: 5px 0px 0px 0px;
+  grid-column: span 9;
+  padding: 5px;
   margin: 5px;
-  width: 834px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-.charsheet section.name .dice {
-  width: 75px;
+.charsheet section.name > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.charsheet section.name > div > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
 }
 .charsheet section.name label {
-  padding-left: 10px;
+  font-size: 0.9em;
+  font-weight: bold;
+  text-align: center;
+  padding: 0;
+  margin-bottom: 3px;
+  width: auto;
+}
+.charsheet section.name input[type=text] {
+  width: 100%;
+  text-align: center;
+}
+.charsheet section.name input[type=number] {
+  height: 25px;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+}
+.charsheet section.name .row2 {
+  margin-top: 10px;
+}
+.charsheet section.name .row2 > div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.charsheet section.name .row2 .columnflex {
+  flex-direction: column;
+  align-items: center;
+}
+.charsheet section.name .row2 .slash {
+  font-size: 1.5em;
+  font-weight: normal;
+  margin: 0 2px;
+}
+.charsheet section.name .row2 button {
+  height: 30px;
+  margin: 0;
+  padding: 5px;
+}
+.charsheet section.name .dice-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.charsheet section.name .dice-row button {
+  height: 25px;
+  padding: 3px 8px;
+  font-size: 0.9em;
+}
+.charsheet .deathsave-box {
+  grid-column: span 3;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 5px;
+  margin: 5px;
+}
+.charsheet .deathsave-box .section.death {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.charsheet section.name .dice {
+  width: auto;
+  min-width: 60px;
 }
 .charsheet section.name select {
   width: 50px;
-}
-.charsheet section.name select.td {
-  margin-left: 14px;
-}
-.charsheet section.name input[type=number] {
-  height: 20px;
+  text-align: center;
 }
 .charsheet section.name button[type=roll] {
-  height: 23px;
   border: 2px solid black;
   background-color: transparent;
-  padding: 2px 5px 4px 5px;
-  margin-top: 10px;
+  font-weight: bold;
 }
 .charsheet section.name button[type=roll]:hover {
   background-color: #87AFC7;
   border-radius: 10px;
-  background-position: 0 -28px;
-}
-.charsheet section.name .row2 input[type=text] {
-  width: 120px;
-}
-.charsheet section.name .row2 .dice {
-  width: 60px;
 }
 .charsheet section.name div.eureka {
   display: none;
@@ -356,7 +416,13 @@
   display: flex;
 }
 .charsheet .attr {
-  grid-area: attr;
+  grid-column: span 12;
+  background: white;
+  opacity: 0.9;
+  border: 2px solid black;
+  padding: 10px;
+  margin: 5px;
+  justify-content: space-around;
 }
 .charsheet .attr .stat {
   background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Stargate-RPG/images/attr.png");
@@ -394,9 +460,11 @@
   border-radius: 15px;
 }
 .charsheet section.skills {
-  grid-area: skills;
+  grid-column: span 4;
+  grid-row: span 2;
   padding-left: 10px;
   margin: 0px 2px 5px 5px;
+  max-width: 380px;
 }
 .charsheet section.skills span:not(.mod) {
   font-weight: bold;
@@ -417,6 +485,7 @@
 }
 .charsheet section.skills div {
   align-content: space-around;
+  margin-bottom: 4px;
 }
 .charsheet section.skills .mod {
   margin: 0px 4px 0px 4px;
@@ -431,6 +500,72 @@
   padding-bottom: 0;
   font-size: 1.4em;
   font-weight: bold;
+}
+.charsheet .right-side {
+  grid-column: span 8;
+  grid-row: span 2;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.charsheet .stats-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto;
+  gap: 5px;
+  margin: 5px;
+}
+.charsheet .stats-container .stat-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  border: 2px solid black;
+  background: white;
+  opacity: 0.9;
+  min-height: 70px;
+  gap: 5px;
+  position: relative;
+}
+
+.charsheet .stats-container .stat-box label {
+  font-size: 0.9em;
+  font-weight: bold;
+  text-align: center;
+  width: auto;
+  margin: 0;
+  line-height: 1;
+}
+.charsheet .stats-container .stat-box input[type=number],
+.charsheet .stats-container .stat-box input[type=text] {
+  height: 28px;
+  padding: 2px;
+  font-size: 1.2em;
+  font-weight: bold;
+  width: 50px;
+  text-align: center;
+}
+.charsheet .stats-container .stat-box .stat-row {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.charsheet .stats-container .stat-box .stat-row .slash {
+  font-size: 1.2em;
+}
+.charsheet .stats-container .stat-box .stat-row input {
+  width: 40px;
+  font-size: 1.1em;
+  height: 26px;
+}
+.charsheet .stats-container .stat-box button {
+  margin: 0;
+  padding: 2px 6px;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  height: 22px;
 }
 .charsheet section.hp {
   grid-area: hp;
@@ -458,10 +593,39 @@
   width: 100px;
   margin: 0;
 }
+.charsheet section.initmoxie {
+  grid-area: initmoxie;
+  width: fit-content;
+}
+.charsheet section.initmoxie input[type=number] {
+  height: 35px;
+  padding-bottom: 0;
+  width: 50px;
+  font-size: 1.5em;
+}
+.charsheet section.initmoxie div {
+  flex-grow: 0.4;
+  margin: 5px;
+}
+.charsheet section.initmoxie > div:nth-child(2) {
+  width: 100px;
+}
+.charsheet section.initmoxie button {
+  margin-right: 0px;
+  text-transform: uppercase;
+  font-size: 1.2em;
+}
+.charsheet section.initmoxie label {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+.charsheet section.initmoxie label.txtcenter {
+  font-size: 1.8em;
+}
 .charsheet section.condition {
-  grid-area: condition;
   padding-left: 10px;
-  margin: 0px 14px 8px 8px;
+  margin: 0;
+  flex: 1;
 }
 .charsheet section.condition span {
   text-transform: uppercase;
@@ -471,18 +635,17 @@
 }
 .charsheet div.prof {
   grid-area: prof;
-}
-.charsheet div.prof span.mod {
-  width: 25px;
-  margin-top: 4px;
-  border-style: none none solid none;
-  margin-bottom: 4px;
-  border-width: 2px;
-  text-align: center;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .charsheet div.prof div {
-  flex-grow: 0.4;
+  flex: 1;
   margin: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
 }
 .charsheet div.prof label {
   font-size: 1.1em;
@@ -492,40 +655,12 @@
   height: 35px;
   padding-bottom: 0;
   margin-top: 4px;
-}
-.charsheet div.prof > div:nth-child(1) {
-  padding: 5px 1px;
-}
-.charsheet div.prof > div:nth-child(1) > label:nth-child(1) {
-  width: 80px;
-}
-.charsheet div.prof > div:nth-child(2) > label:nth-child(1) {
-  padding: 0px;
-}
-.charsheet div.prof .init {
-  margin-left: 2px;
-  margin-right: 2px;
-  padding-left: 2px;
-  padding-right: 2px;
-}
-.charsheet div.prof .init button {
-  width: 63px;
-  margin-left: 0px;
-  padding-right: 7px;
-  padding-left: 2px;
-}
-.charsheet div.prof .moxie {
-  width: 62px;
+  font-size: 1.5em;
+  width: 60px;
 }
 .charsheet div.prof label.wide {
-  width: 96px;
+  width: auto;
   padding: 0px;
-}
-.charsheet .prof > div:nth-child(2) > label:nth-child(1) {
-  width: 56px;
-}
-.charsheet div.moxie > label:nth-child(1) {
-  width: 54px;
 }
 .charsheet div.death span {
   padding: 5px 0;
@@ -535,10 +670,17 @@
 }
 .charsheet div.ac {
   grid-area: ac;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .charsheet div.ac div {
-  flex-grow: 0.4;
+  flex: 1;
   margin: 5px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .charsheet div.ac label {
   font-size: 1.2em;
@@ -555,17 +697,26 @@
 }
 .charsheet div.speed {
   grid-area: speed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 .charsheet div.speed div {
-  flex-grow: 0.4;
+  flex: 1;
   margin: 5px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
-.charsheet div.speed .speed label {
+.charsheet div.speed label {
   font-size: 1.2em;
   font-weight: bold;
 }
 .charsheet div.speed input[type=text] {
   padding: 5px;
+  height: 35px;
+  margin-top: 4px;
 }
 .charsheet div.speed div.death label {
   width: 100px;
@@ -578,10 +729,26 @@
 .charsheet div.speed div.death div {
   margin: 5px 0px;
 }
+.charsheet .saves-inventory-container {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  margin: 5px;
+  flex: 1;
+  min-height: 200px;
+}
+
+.charsheet .saves-condition-column {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+}
+
 .charsheet section.saves {
-  grid-area: saves;
-  margin: 5px 20px 5px 5px;
+  margin: 0;
   justify-content: space-between;
+  flex: 1;
 }
 .charsheet section.saves span.mod {
   width: 25px;
@@ -604,54 +771,91 @@
 .charsheet div.bulk {
   grid-area: bulk;
   display: flex;
-  width: 171px;
-  gap: 10px;
+  justify-content: center;
+  align-items: center;
+}
+.charsheet div.bulk > div {
+  flex: 1;
+  margin: 5px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 .charsheet div.bulk .section {
   flex: 1 1 0px;
 }
 .charsheet section.inventory {
-  grid-area: inventory;
-  width: 156px;
+  margin: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
 }
 .charsheet section.inventory textarea {
   width: 95%;
   height: 95%;
   margin-bottom: 0px;
 }
-.charsheet section.attacks {
-  grid-area: attacks;
-  display: grid;
-  grid-template-columns: 3.5fr repeat(5, 1fr) 2fr;
-  grid-template-rows: repeat(7, 1fr);
-  margin: 0px 20px 10px 5px;
+.charsheet section.inventory .inventory-header {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  padding: 0 5px 5px 5px;
+  font-weight: bold;
+  font-size: 0.9em;
+  border-bottom: 2px solid black;
+  margin: 5px 5px 5px 5px;
 }
-.charsheet section.attacks label {
-  text-transform: capitalize;
+.charsheet section.inventory .inventory-header .header-bulk {
+  width: 50px;
+  text-align: center;
+  margin: 0 4px;
 }
-.charsheet section.attacks .name {
-  padding-left: 42px;
+.charsheet section.inventory .inventory-header .header-amount {
+  width: 50px;
+  text-align: center;
+  margin: 0 4px;
 }
-.charsheet section.attacks .dmg-type {
-  padding-left: 9px;
+.charsheet section.inventory .inventory-header .header-name {
+  flex: 1;
+  text-align: center;
+  margin: 0 4px;
 }
-.charsheet section.attacks span {
-  height: 25px;
+.charsheet section.inventory .inventory-row {
+  display: flex;
+  gap: 5px;
+  align-items: center;
+  padding: 0 5px;
 }
-.charsheet section.attacks div button[type=roll] {
-  height: 20px;
+.charsheet section.inventory .inventory-row input[type=number] {
+  width: 50px;
+  margin: 0;
 }
-.charsheet section.attacks div input[type=text] {
-  height: 20px;
+.charsheet section.inventory .inventory-row input[type=text] {
+  flex: 1;
+  margin: 0;
 }
-.charsheet section.attacks .mr15 {
-  margin-right: 10px;
+.charsheet section.inventory .inventory-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 5px;
+  align-items: center;
 }
-.charsheet section.attacks .ml15 {
-  margin-left: 15px;
+.charsheet section.inventory .bulk-total {
+  font-weight: bold;
+  font-size: 1.1em;
 }
-.charsheet section.attacks .pl20 {
-  padding-left: 20px;
+.charsheet section.inventory .bulk-display,
+.charsheet section.inventory .bulk-limit-display {
+  font-weight: bold;
+  font-size: 1.1em;
+  color: black;
+  display: inline;
+}
+.charsheet section.inventory input[name="attr_inventory_bulk_over_limit"]:checked ~ .inventory-footer .bulk-total .bulk-display {
+  color: red !important;
 }
 .charsheet main.settings input[type=checkbox] {
   width: 44px;
@@ -693,26 +897,141 @@
   height: 60px;
   width: 245px;
 }
-.charsheet section.changelog {
-  grid-area: changelog;
-}
-.charsheet section.changelog button[type=roll] {
-  margin-bottom: 10px;
-}
-.charsheet div.ammo.grid {
-  grid-area: ammo;
+.charsheet section.attacks {
+  grid-area: attacks;
   display: grid;
-  grid-gap: 8px;
-  grid-template-columns: 1fr 1fr;
-  grid-template-rows: 1fr 1fr;
-  padding: 5px 20px 5px 0px;
+  grid-template-columns: 3.5fr repeat(5, 1fr) 2fr;
+  grid-template-rows: repeat(8, 1fr);
+  margin: 0px 20px 10px 5px;
 }
-.charsheet div.ammo label {
+.charsheet section.attacks label {
+  text-transform: capitalize;
+}
+.charsheet section.attacks .name {
+  padding-left: 42px;
+}
+.charsheet section.attacks .dmg-type {
+  padding-left: 9px;
+}
+.charsheet section.attacks span {
+  height: 25px;
+}
+.charsheet section.attacks div button[type=roll] {
+  height: 20px;
+}
+.charsheet section.attacks div input[type=text] {
+  height: 20px;
+}
+.charsheet section.attacks .mr15 {
+  margin-right: 10px;
+}
+.charsheet section.attacks .ml15 {
+  margin-left: 15px;
+}
+.charsheet section.attacks .pl20 {
+  padding-left: 20px;
+}
+.charsheet section.weapons {
+  grid-column: span 12;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 0;
+}
+.charsheet section.weapons h2 {
   text-align: center;
-  padding: 0px 0px 5px 0px;
+  margin: 5px 0;
+  color: white;
 }
-.charsheet div.ammo div {
-  margin: 7px 1px;
+.charsheet .weapons-container {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  width: 100%;
+  box-sizing: border-box;
+}
+.charsheet .weapon-box {
+  background: transparent;
+  border: 2px solid black;
+  padding: 8px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  box-sizing: border-box;
+}
+.charsheet .weapon-box * {
+  box-sizing: border-box;
+}
+.charsheet .weapon-header {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 5px;
+  border-bottom: 2px solid black;
+  padding-bottom: 8px;
+}
+.charsheet .weapon-header button {
+  height: 25px;
+  border: 2px solid black;
+  background-color: transparent;
+  font-weight: bold;
+  padding: 2px 5px;
+}
+.charsheet .weapon-header button:hover {
+  background-color: #87AFC7;
+  border-radius: 10px;
+}
+.charsheet .weapon-header input {
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+}
+.charsheet .weapon-row {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+.charsheet .weapon-row .weapon-field {
+  flex: 1;
+}
+.charsheet .weapon-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.charsheet .weapon-field label {
+  font-size: 0.8em;
+  font-weight: bold;
+  margin: 0;
+  width: auto;
+}
+.charsheet .weapon-field input[type=text],
+.charsheet .weapon-field input[type=number] {
+  width: 100%;
+  padding: 3px;
+}
+.charsheet .weapon-field.weapon-range .range-inputs {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.charsheet .weapon-field.weapon-range .range-inputs input {
+  width: calc(50% - 8px);
+}
+.charsheet .weapon-field.weapon-range .range-inputs span {
+  font-weight: bold;
+  font-size: 1em;
+}
+.charsheet .weapon-field textarea {
+  width: 100%;
+  height: 50px;
+  resize: vertical;
+  padding: 3px;
+  margin-bottom: 0;
 }
 
 .sheet-rolltemplate-stargate {
@@ -796,4 +1115,15 @@
   grid-column: span 2;
   padding: 5px;
   text-align: center;
+}
+
+.sheet-rolltemplate-stargate .sheet-condition-note {
+  grid-column: span 2;
+  padding: 5px;
+  text-align: center;
+  border-top: 1px solid #999;
+  margin-top: 5px;
+  font-style: italic;
+  color: #D32F2F;
+  font-weight: bold;
 }
