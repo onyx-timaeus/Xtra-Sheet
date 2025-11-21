@@ -1,0 +1,1184 @@
+.charsheet {
+  background-color: black;
+}
+.charsheet input[type=range].progress-bar {
+  width: 100px;
+}
+.charsheet input[type=range].progress-bar::-moz-range-thumb {
+  background: transparent;
+  border-color: transparent;
+  color: transparent;
+}
+.charsheet input[type=range].progress-bar::-moz-range-progress {
+  background: green;
+  height: 10px;
+}
+.charsheet input[type=range].progress-bar::-moz-range-track {
+  background: red;
+  height: 10px;
+}
+.charsheet input[type=number].progress-bar {
+  border: 2px solid black;
+}
+.charsheet button.hidden {
+  display: none;
+}
+.charsheet .bold {
+  font-weight: 800;
+  font-size: medium;
+}
+.charsheet label {
+  margin: 0px;
+  width: 70px;
+  text-transform: capitalize;
+  font-size: 0.8em;
+}
+.charsheet label.title {
+  width: 130px;
+  font-size: 1.3em;
+  text-align: center;
+}
+.charsheet h3 {
+  text-align: center;
+  line-height: 23px;
+}
+.charsheet h5, .charsheet .txtcenter {
+  text-align: center;
+}
+.charsheet .slash {
+  font-size: 2em;
+  font-weight: bold;
+}
+.charsheet input[type=text] {
+  background-color: transparent;
+  border-style: none none solid none;
+  border-width: 2px;
+  border-radius: 0px;
+  border-color: black;
+  padding: 0px 4px;
+  margin: 0px 4px;
+  width: auto;
+}
+.charsheet input[type=text]:placeholder-shown {
+  background-color: #EAC9D1;
+}
+.charsheet input[type=text]:focus {
+  background-color: #ccc;
+}
+.charsheet input[type=number] {
+  background-color: transparent;
+  border-style: none none solid none;
+  border-width: 2px;
+  border-radius: 0px;
+  border-color: black;
+  text-align: center;
+  width: 40px;
+  margin-bottom: 0;
+}
+.charsheet input[type=number]:placeholder-shown {
+  background-color: #EAC9D1;
+}
+.charsheet input[type=number]:focus {
+  background-color: #ccc;
+}
+.charsheet .w30,
+.charsheet input[type=text].w30,
+.charsheet input[type=number].w30 {
+  width: 30px;
+}
+.charsheet .w40,
+.charsheet input[type=text].w40,
+.charsheet input[type=number].w40 {
+  width: 40px;
+}
+.charsheet .w50,
+.charsheet input[type=text].w50,
+.charsheet input[type=number].w50 {
+  width: 50px;
+}
+.charsheet .w70,
+.charsheet input[type=text].w70,
+.charsheet input[type=number].w70 {
+  width: 70px;
+}
+.charsheet .w110,
+.charsheet input[type=text].w110,
+.charsheet input[type=number].w110 {
+  width: 110px;
+}
+.charsheet input[type=checkbox].checkbox {
+  border-style: solid black;
+  border-radius: 0px;
+}
+.charsheet input[type=text].stat,
+.charsheet input[type=number].stat {
+  font-size: 2em;
+  font-weight: bold;
+}
+.charsheet textarea:placeholder-shown,
+.charsheet input[type=text]:placeholder-shown,
+.charsheet input[type=number]:placeholder-shown {
+  background-color: #EAC9D1;
+}
+.charsheet textarea:focus,
+.charsheet input[type=text]:focus,
+.charsheet input[type=number]:focus {
+  background-color: #ccc;
+}
+.charsheet input[type=number]::-webkit-inner-spin-button,
+.charsheet input[type=number]::-webkit-outer-spin-button,
+.charsheet input[type=number].txtfield::-webkit-inner-spin-button,
+.charsheet input[type=number].txtfield::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+.charsheet input[type=number],
+.charsheet input[type=number].txtfield {
+  -moz-appearance: textfield;
+}
+.charsheet button[type=roll].txt-btn {
+  height: 19px;
+  border: 2px solid black;
+  background-color: transparent;
+  margin-left: 5px;
+  font-weight: bold;
+  padding: 2px 5px 4px 5px;
+}
+.charsheet button[type=roll].txt-btn:before {
+  content: " ";
+}
+.charsheet button[type=roll].txt-btn:hover {
+  background-color: #87AFC7;
+  border-radius: 10px;
+  background-position: 0 -28px;
+}
+.charsheet .section,
+.charsheet section {
+  display: flex;
+  padding: 5px;
+  border: 2px solid black;
+  background: white;
+  opacity: 0.9;
+}
+.charsheet .columnflex {
+  display: flex;
+  flex-direction: column;
+}
+.charsheet .rowflex {
+  display: flex;
+  flex-direction: row;
+}
+.charsheet .wrap {
+  flex-wrap: wrap;
+}
+.charsheet .nowrap {
+  flex-wrap: nowrap;
+}
+.charsheet .center {
+  align-items: center;
+}
+.charsheet .middle {
+  justify-content: center;
+}
+.charsheet .spaced {
+  justify-content: space-evenly;
+}
+.charsheet .gap5 {
+  gap: 5px;
+}
+.charsheet main.character {
+  display: grid;
+  grid-template-columns: repeat(12, 1fr);
+  grid-template-rows: auto auto auto auto;
+  width: 850px;
+  min-height: 1000px;
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Stargate-RPG/images/bg.png");
+  background-repeat: no-repeat;
+  background-size: 700px 700px;
+  background-position: center;
+  background-color: black;
+  gap: 0;
+}
+.charsheet main.background {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr 1fr;
+  grid-template-areas: "racial feats    " "class  equipment" "prof   notes    ";
+  width: 840px;
+  height: 990px;
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Stargate-RPG/images/bg.png");
+  background-repeat: no-repeat;
+  background-size: 700px 700px;
+  background-position: center;
+  background-color: black;
+  grid-gap: 10px;
+  padding: 5px;
+}
+.charsheet main.background label {
+  font-size: 1.4em;
+  font-weight: bold;
+  text-align: center;
+  width: 140px;
+}
+.charsheet main.background textarea {
+  width: 390px;
+  height: 280px;
+  margin-bottom: 0px;
+}
+.charsheet main.settings {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: auto auto;
+  grid-template-areas: "settings other" "attacks attacks";
+  width: 840px;
+  min-height: 990px;
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Stargate-RPG/images/bg.png");
+  background-repeat: no-repeat;
+  background-size: 700px 700px;
+  background-position: center;
+  background-color: black;
+  grid-gap: 10px;
+  padding: 5px;
+}
+.charsheet main.settings .settings label {
+  font-size: 1.4em;
+  font-weight: bold;
+  text-align: center;
+  width: 250px;
+}
+.charsheet main.settings label.other {
+  font-size: 1.4em;
+  font-weight: bold;
+  text-align: center;
+  width: 250px;
+}
+.charsheet main.npc {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  width: 840px;
+  height: 990px;
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Stargate-RPG/images/bg.png");
+  background-repeat: no-repeat;
+  background-size: 700px 700px;
+  background-position: center;
+  background-color: black;
+  grid-gap: 10px;
+  padding: 5px;
+}
+.charsheet main.character,
+.charsheet main.background,
+.charsheet main.npc,
+.charsheet button[type=action].npc,
+.charsheet button[type=action].pc,
+.charsheet main.settings {
+  display: none;
+}
+.charsheet input.tabstoggle[value=character] ~ main.character,
+.charsheet input.tabstoggle[value=background] ~ main.background,
+.charsheet input.tabstoggle[value=npc] ~ main.npc,
+.charsheet input.tabstoggle[value=settings] ~ main.settings {
+  display: grid;
+}
+.charsheet input.npctoggle[value="0"] ~ button[type=action].pc,
+.charsheet input.npctoggle[value="1"] ~ button[type=action].npc {
+  display: flex;
+}
+.charsheet div.tab-buttons {
+  display: flex;
+  gap: 10px;
+  z-index: 10;
+  position: sticky;
+  top: 0px;
+  border: 3px solid black;
+  border-radius: 5px;
+  background-color: #d9d9d9;
+  width: 845px;
+}
+.charsheet div.tab-buttons button {
+  font-size: 1.5em;
+}
+.charsheet div.tab-buttons .version {
+  display: flex;
+  flex-flow: row nowrap;
+}
+.charsheet main.character input[type=checkbox] {
+  width: 18px;
+}
+.charsheet section.name {
+  grid-column: span 9;
+  padding: 5px;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.charsheet section.name > div {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 10px;
+}
+.charsheet section.name > div > div {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  flex: 1;
+}
+.charsheet section.name label {
+  font-size: 0.9em;
+  font-weight: bold;
+  text-align: center;
+  padding: 0;
+  margin-bottom: 3px;
+  width: auto;
+}
+.charsheet section.name input[type=text] {
+  width: 100%;
+  text-align: center;
+}
+.charsheet section.name input[type=number] {
+  height: 25px;
+  font-size: 1.2em;
+  font-weight: bold;
+  text-align: center;
+}
+.charsheet section.name .row2 {
+  margin-top: 10px;
+}
+.charsheet section.name .row2 > div {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.charsheet section.name .row2 .columnflex {
+  flex-direction: column;
+  align-items: center;
+}
+.charsheet section.name .row2 .slash {
+  font-size: 1.5em;
+  font-weight: normal;
+  margin: 0 2px;
+}
+.charsheet section.name .row2 button {
+  height: 30px;
+  margin: 0;
+  padding: 5px;
+}
+.charsheet section.name .dice-row {
+  display: flex;
+  align-items: center;
+  gap: 5px;
+}
+.charsheet section.name .dice-row button {
+  height: 25px;
+  padding: 3px 8px;
+  font-size: 0.9em;
+}
+.charsheet .deathsave-box {
+  grid-column: span 3;
+  display: flex;
+  align-items: stretch;
+  justify-content: center;
+  padding: 5px;
+  margin: 5px;
+}
+.charsheet .deathsave-box .section.death {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+}
+.charsheet section.name .dice {
+  width: auto;
+  min-width: 60px;
+}
+.charsheet section.name select {
+  width: 50px;
+  text-align: center;
+}
+.charsheet section.name button[type=roll] {
+  border: 2px solid black;
+  background-color: transparent;
+  font-weight: bold;
+}
+.charsheet section.name button[type=roll]:hover {
+  background-color: #87AFC7;
+  border-radius: 10px;
+}
+.charsheet section.name div.eureka {
+  display: none;
+}
+.charsheet section.name input[type=hidden][value=Scientist].eureka ~ div.eureka,
+.charsheet section.name input[type=hidden][value=scientist].eureka ~ div.eureka,
+.charsheet section.name input[type=hidden][value="1"].eureka ~ div.eureka {
+  display: flex;
+}
+.charsheet .attr {
+  grid-column: span 12;
+  background: white;
+  opacity: 0.9;
+  border: 2px solid black;
+  padding: 10px;
+  margin: 5px;
+  justify-content: space-around;
+}
+.charsheet .attr .stat {
+  background-image: url("https://raw.githubusercontent.com/Roll20/roll20-character-sheets/master/Stargate-RPG/images/attr.png");
+  background-repeat: no-repeat;
+  background-size: 124px 113px;
+  width: 120px;
+  height: 120px;
+  background-position: center;
+}
+.charsheet .attr span:not(.mod) {
+  font-weight: bold;
+  font-size: 1.1em;
+  text-transform: uppercase;
+  font-size: 1.5em;
+}
+.charsheet .attr span.mod {
+  width: 25px;
+  margin-top: 4px;
+  border-style: none;
+  margin-bottom: 17px;
+  border-width: 2px;
+  text-align: center;
+  font-weight: bold;
+}
+.charsheet .attr input[type=number] {
+  width: 2em;
+  margin-bottom: 7px;
+  border-style: none;
+  font-weight: bold;
+  font-size: 1.5em;
+}
+.charsheet .attr button[type=roll].large {
+  font-size: 1.5em;
+  margin-bottom: -3px;
+  border-radius: 15px;
+}
+.charsheet section.skills {
+  grid-column: span 4;
+  grid-row: span 2;
+  padding-left: 10px;
+  margin: 0px 2px 5px 5px;
+  max-width: 380px;
+}
+.charsheet section.skills span:not(.mod) {
+  font-weight: bold;
+  font-size: 1.1em;
+  text-transform: uppercase;
+  text-transform: uppercase;
+  font-size: 0.7em;
+  padding-top: 9px;
+  margin-left: 0px;
+}
+.charsheet section.skills span.mod {
+  width: 25px;
+  margin-top: 4px;
+  border-style: none none solid none;
+  margin-bottom: 4px;
+  border-width: 2px;
+  text-align: center;
+}
+.charsheet section.skills div {
+  align-content: space-around;
+  margin-bottom: 4px;
+}
+.charsheet section.skills .mod {
+  margin: 0px 4px 0px 4px;
+}
+.charsheet section.skills button[type=roll] {
+  margin-right: 0px;
+  text-transform: uppercase;
+  font-size: 1.2em;
+}
+.charsheet section.skills input[type=number] {
+  margin-left: 5px;
+  padding-bottom: 0;
+  font-size: 1.4em;
+  font-weight: bold;
+}
+.charsheet .right-side {
+  grid-column: span 8;
+  grid-row: span 2;
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+}
+
+.charsheet .stats-container {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  grid-template-rows: auto auto;
+  gap: 5px;
+  margin: 5px;
+}
+.charsheet .stats-container .stat-box {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  border: 2px solid black;
+  background: white;
+  opacity: 0.9;
+  min-height: 70px;
+  gap: 5px;
+  position: relative;
+}
+
+.charsheet .stats-container .stat-box label {
+  font-size: 0.9em;
+  font-weight: bold;
+  text-align: center;
+  width: auto;
+  margin: 0;
+  line-height: 1;
+}
+.charsheet .stats-container .stat-box input[type=number],
+.charsheet .stats-container .stat-box input[type=text] {
+  height: 28px;
+  padding: 2px;
+  font-size: 1.2em;
+  font-weight: bold;
+  width: 50px;
+  text-align: center;
+}
+.charsheet .stats-container .stat-box .stat-row {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.charsheet .stats-container .stat-box .stat-row .slash {
+  font-size: 1.2em;
+}
+.charsheet .stats-container .stat-box .stat-row input {
+  width: 40px;
+  font-size: 1.1em;
+  height: 26px;
+}
+.charsheet .stats-container .stat-box button {
+  margin: 0;
+  padding: 2px 6px;
+  text-transform: uppercase;
+  font-size: 0.75em;
+  height: 22px;
+}
+.charsheet section.hp {
+  grid-area: hp;
+}
+.charsheet section.hp input[type=number] {
+  height: 35px;
+  padding-bottom: 0;
+}
+.charsheet section.hp > div:nth-child(2) {
+  width: 100px;
+}
+.charsheet section.hp div {
+  flex-grow: 0.4;
+  margin: 5px;
+}
+.charsheet section.hp label {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+.charsheet section.hp label.txtcenter {
+  font-size: 1.8em;
+}
+.charsheet section.hp .temphp label {
+  font-size: 1.3em;
+  width: 100px;
+  margin: 0;
+}
+.charsheet section.initmoxie {
+  grid-area: initmoxie;
+  width: fit-content;
+}
+.charsheet section.initmoxie input[type=number] {
+  height: 35px;
+  padding-bottom: 0;
+  width: 50px;
+  font-size: 1.5em;
+}
+.charsheet section.initmoxie div {
+  flex-grow: 0.4;
+  margin: 5px;
+}
+.charsheet section.initmoxie > div:nth-child(2) {
+  width: 100px;
+}
+.charsheet section.initmoxie button {
+  margin-right: 0px;
+  text-transform: uppercase;
+  font-size: 1.2em;
+}
+.charsheet section.initmoxie label {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+.charsheet section.initmoxie label.txtcenter {
+  font-size: 1.8em;
+}
+.charsheet section.condition {
+  padding-left: 10px;
+  margin: 0;
+  flex: 1;
+}
+.charsheet section.condition span {
+  text-transform: uppercase;
+  padding-left: 5px;
+  font-weight: bold;
+  font-size: 12px;
+}
+.charsheet div.prof {
+  grid-area: prof;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.charsheet div.prof div {
+  flex: 1;
+  margin: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+.charsheet div.prof label {
+  font-size: 1.1em;
+  font-weight: bold;
+}
+.charsheet div.prof input[type=number] {
+  height: 35px;
+  padding-bottom: 0;
+  margin-top: 4px;
+  font-size: 1.5em;
+  width: 60px;
+}
+.charsheet div.prof label.wide {
+  width: auto;
+  padding: 0px;
+}
+.charsheet div.death span {
+  padding: 5px 0;
+}
+.charsheet div.death span.pad {
+  padding: 5px 3px 5px 5px;
+}
+.charsheet div.ac {
+  grid-area: ac;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.charsheet div.ac div {
+  flex: 1;
+  margin: 5px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.charsheet div.ac label {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.charsheet div.ac label.wide {
+  width: 105px;
+  padding: 0px;
+}
+.charsheet div.ac input[type=number] {
+  height: 35px;
+  padding-bottom: 0;
+  margin-top: 4px;
+}
+.charsheet div.speed {
+  grid-area: speed;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.charsheet div.speed div {
+  flex: 1;
+  margin: 5px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.charsheet div.speed label {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+.charsheet div.speed input[type=text] {
+  padding: 5px;
+  height: 35px;
+  margin-top: 4px;
+}
+.charsheet div.speed div.death label {
+  width: 100px;
+  padding: 0px;
+}
+.charsheet div.speed div.death span {
+  font-size: 0.8em;
+  font-weight: bold;
+}
+.charsheet div.speed div.death div {
+  margin: 5px 0px;
+}
+.charsheet .saves-inventory-container {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+  margin: 5px;
+  flex: 1;
+  min-height: 200px;
+}
+
+.charsheet .saves-condition-column {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  flex: 1;
+}
+
+.charsheet section.saves {
+  margin: 0;
+  justify-content: space-between;
+  flex: 1;
+}
+.charsheet section.saves span.mod {
+  width: 25px;
+  margin-top: 4px;
+  border-style: none none solid none;
+  margin-bottom: 4px;
+  border-width: 2px;
+  text-align: center;
+  margin: 0px 4px;
+}
+.charsheet section.saves input[type=number] {
+  margin-left: 5px;
+}
+.charsheet section.saves div {
+  padding-left: 8px;
+}
+.charsheet section.saves div.mb20 {
+  margin-bottom: 20px;
+}
+.charsheet div.bulk {
+  grid-area: bulk;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.charsheet div.bulk > div {
+  flex: 1;
+  margin: 5px;
+  min-height: 120px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+.charsheet div.bulk .section {
+  flex: 1 1 0px;
+}
+.charsheet section.inventory {
+  margin: 0;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  min-width: 0;
+  padding: 8px;
+}
+.charsheet section.inventory h4 {
+  margin: 5px 0 10px 0;
+  text-align: center;
+}
+.charsheet section.inventory textarea {
+  width: 95%;
+  height: 95%;
+  margin-bottom: 0px;
+}
+.charsheet section.inventory fieldset.repeating_inventory {
+  border: none;
+  padding: 0;
+  margin: 0;
+}
+.charsheet section.inventory .inventory-row {
+  display: flex;
+  gap: 5px;
+  align-items: flex-end;
+  margin-bottom: 5px;
+}
+.charsheet section.inventory .inventory-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.charsheet section.inventory .inventory-cell label {
+  font-size: 0.75em;
+  font-weight: bold;
+  text-align: center;
+  margin: 0;
+  width: auto;
+}
+.charsheet section.inventory .inventory-cell:nth-child(1) {
+  width: 60px;
+}
+.charsheet section.inventory .inventory-cell:nth-child(2) {
+  width: 60px;
+}
+.charsheet section.inventory .inventory-cell.inventory-name {
+  flex: 1;
+}
+.charsheet section.inventory .inventory-cell input[type=number] {
+  width: 100%;
+  margin: 0;
+  text-align: center;
+  padding: 3px;
+}
+.charsheet section.inventory .inventory-cell input[type=text] {
+  width: 100%;
+  margin: 0;
+  padding: 3px 5px;
+}
+.charsheet section.inventory .inventory-footer {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 2px solid black;
+  align-items: center;
+}
+.charsheet section.inventory .bulk-total {
+  font-weight: bold;
+  font-size: 1.1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
+}
+.charsheet section.inventory .bulk-display-readonly {
+  border: none;
+  background: transparent;
+  font-weight: bold;
+  font-size: 1.1em;
+  text-align: center;
+  padding: 0;
+  color: black;
+  width: 150px;
+  pointer-events: none;
+}
+.charsheet section.inventory input[name="attr_inventory_bulk_over_limit"]:checked ~ .inventory-footer .bulk-total .bulk-display-readonly {
+  color: red !important;
+}
+.charsheet section.inventory .repcontrol {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+.charsheet section.inventory .repcontrol button {
+  padding: 5px 10px;
+  font-weight: bold;
+  background: #f0f0f0;
+  border: 1px solid #999;
+  cursor: pointer;
+}
+.charsheet section.inventory .repcontrol button:hover {
+  background: #e0e0e0;
+}
+.charsheet section.inventory .repitem {
+  margin-bottom: 3px;
+  position: relative;
+}
+.charsheet section.inventory .repitem .itemcontrol button {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.9em;
+  border-radius: 3px;
+  margin-left: 5px;
+}
+.charsheet section.inventory .repitem .itemcontrol button:hover {
+  background: #ff5252;
+}
+.charsheet main.settings input[type=checkbox] {
+  width: 44px;
+}
+.charsheet main.settings span {
+  margin-right: 0.5em;
+  padding-top: 0.3em;
+}
+.charsheet main.settings select {
+  margin: 0;
+  width: 120px;
+}
+.charsheet section.settings {
+  grid-area: settings;
+}
+.charsheet section.settings select.w60 {
+  width: 60px;
+}
+.charsheet section.settings div {
+  padding: 10px;
+}
+.charsheet section.settings input[type=text] {
+  width: 395px;
+}
+.charsheet section.other {
+  grid-area: other;
+}
+.charsheet section.other div {
+  padding: 10px;
+}
+.charsheet section.other span {
+  font-size: 1.3em;
+  margin-right: 10px;
+}
+.charsheet section.other input[type=text] {
+  width: 395px;
+}
+.charsheet section.other textarea.dmg {
+  height: 60px;
+  width: 245px;
+}
+.charsheet section.attacks {
+  grid-area: attacks;
+  display: grid;
+  grid-template-columns: 3.5fr repeat(5, 1fr) 2fr;
+  grid-template-rows: repeat(8, 1fr);
+  margin: 0px 20px 10px 5px;
+}
+.charsheet section.attacks label {
+  text-transform: capitalize;
+}
+.charsheet section.attacks .name {
+  padding-left: 42px;
+}
+.charsheet section.attacks .dmg-type {
+  padding-left: 9px;
+}
+.charsheet section.attacks span {
+  height: 25px;
+}
+.charsheet section.attacks div button[type=roll] {
+  height: 20px;
+}
+.charsheet section.attacks div input[type=text] {
+  height: 20px;
+}
+.charsheet section.attacks .mr15 {
+  margin-right: 10px;
+}
+.charsheet section.attacks .ml15 {
+  margin-left: 15px;
+}
+.charsheet section.attacks .pl20 {
+  padding-left: 20px;
+}
+.charsheet section.weapons {
+  grid-column: span 12;
+  width: 100%;
+  box-sizing: border-box;
+  margin-top: 0;
+  background: transparent;
+  border: none;
+  opacity: 1;
+}
+.charsheet section.weapons h2 {
+  display: none;
+}
+.charsheet .weapons-container {
+  display: flex;
+  flex-direction: row;
+  gap: 6px;
+  justify-content: flex-start;
+  align-items: stretch;
+  flex-wrap: nowrap;
+  width: 100%;
+  box-sizing: border-box;
+}
+.charsheet .weapon-box {
+  background: white;
+  opacity: 0.9;
+  border: 2px solid black;
+  padding: 8px;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  min-width: 0;
+  box-sizing: border-box;
+}
+.charsheet .weapon-box * {
+  box-sizing: border-box;
+}
+.charsheet .weapon-header {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  margin-bottom: 5px;
+  border-bottom: 2px solid black;
+  padding-bottom: 8px;
+}
+.charsheet .weapon-header button {
+  height: 25px;
+  border: 2px solid black;
+  background-color: transparent;
+  font-weight: bold;
+  padding: 2px 5px;
+}
+.charsheet .weapon-header button:hover {
+  background-color: #87AFC7;
+  border-radius: 10px;
+}
+.charsheet .weapon-header input {
+  font-weight: bold;
+  text-align: center;
+  width: 100%;
+}
+.charsheet .weapon-row {
+  display: flex;
+  flex-direction: row;
+  gap: 5px;
+}
+.charsheet .weapon-row .weapon-field {
+  flex: 1;
+}
+.charsheet .weapon-field {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+.charsheet .weapon-field label {
+  font-size: 0.8em;
+  font-weight: bold;
+  margin: 0;
+  width: auto;
+}
+.charsheet .weapon-field input[type=text],
+.charsheet .weapon-field input[type=number] {
+  width: 100%;
+  padding: 3px;
+}
+.charsheet .weapon-field.weapon-range .range-inputs {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+}
+.charsheet .weapon-field.weapon-range .range-inputs input {
+  width: calc(50% - 8px);
+}
+.charsheet .weapon-field.weapon-range .range-inputs span {
+  font-weight: bold;
+  font-size: 1em;
+}
+.charsheet .weapon-field textarea {
+  width: 100%;
+  height: 50px;
+  resize: vertical;
+  padding: 3px;
+  margin-bottom: 0;
+}
+
+.sheet-rolltemplate-stargate {
+  margin-left: -37px;
+}
+
+.withoutavatars .sheet-rolltemplate-stargate {
+  margin-left: -7px;
+}
+
+.sheet-rolltemplate-stargate .sheet-container {
+  border: 3px solid black;
+  border-radius: 3px;
+}
+
+.sheet-rolltemplate-stargate .sheet-header {
+  background-color: var(--header-bg-color);
+  color: var(--header-text-color);
+  text-align: left;
+  text-transform: capitalize;
+  padding: 5px;
+  border-bottom: 2px solid black;
+}
+
+.sheet-rolltemplate-stargate .sheet-title {
+  font-size: 1.2em;
+  font-weight: bold;
+}
+
+.sheet-rolltemplate-stargate .sheet-title img.sheet-phoenix {
+  width: 33px;
+  height: 33px;
+  float: right;
+}
+
+.sheet-rolltemplate-stargate .sheet-subtitle {
+  font-size: 0.9em;
+}
+
+.sheet-rolltemplate-stargate .sheet-container {
+  --header-bg-color: #a83521;
+  --header-text-color: #FFF;
+}
+
+.sheet-rolltemplate-stargate .sheet-container.sheet-color-green {
+  --header-bg-color: #008000;
+}
+
+.sheet-rolltemplate-stargate .sheet-container.sheet-color-black {
+  --header-bg-color: #000;
+}
+
+.sheet-rolltemplate-stargate .sheet-container.sheet-color-white {
+  --header-bg-color: #FFF;
+  --header-text-color: #000;
+}
+
+.sheet-rolltemplate-stargate .sheet-content {
+  display: grid;
+  background: #FFF;
+  grid-template-columns: auto auto;
+  line-height: 1.4em;
+}
+
+.sheet-rolltemplate-stargate .sheet-content > div {
+  padding: 5px;
+}
+
+.sheet-rolltemplate-stargate .sheet-content .sheet-key {
+  font-weight: bold;
+  padding-right: 10px;
+  text-align: right;
+}
+
+.sheet-rolltemplate-stargate .sheet-content :nth-child(4n+3),
+.sheet-rolltemplate-stargate .sheet-content :nth-child(4n) {
+  background: #EEE;
+}
+
+.sheet-rolltemplate-stargate .sheet-desc {
+  grid-column: span 2;
+  padding: 5px;
+  text-align: center;
+}
+
+.sheet-rolltemplate-stargate .sheet-condition-note {
+  grid-column: span 2;
+  padding: 5px;
+  text-align: center;
+  border-top: 1px solid #999;
+  margin-top: 5px;
+  font-style: italic;
+  color: #D32F2F;
+  font-weight: bold;
+}
