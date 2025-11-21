@@ -791,71 +791,124 @@
   display: flex;
   flex-direction: column;
   min-width: 0;
+  padding: 8px;
+}
+.charsheet section.inventory h4 {
+  margin: 5px 0 10px 0;
+  text-align: center;
 }
 .charsheet section.inventory textarea {
   width: 95%;
   height: 95%;
   margin-bottom: 0px;
 }
-.charsheet section.inventory .inventory-header {
-  display: flex;
-  gap: 5px;
-  align-items: center;
-  padding: 0 5px 5px 5px;
-  font-weight: bold;
-  font-size: 0.9em;
-  border-bottom: 2px solid black;
-  margin: 5px 5px 5px 5px;
-}
-.charsheet section.inventory .inventory-header .header-bulk {
-  width: 50px;
-  text-align: center;
-  margin: 0 4px;
-}
-.charsheet section.inventory .inventory-header .header-amount {
-  width: 50px;
-  text-align: center;
-  margin: 0 4px;
-}
-.charsheet section.inventory .inventory-header .header-name {
-  flex: 1;
-  text-align: center;
-  margin: 0 4px;
+.charsheet section.inventory fieldset.repeating_inventory {
+  border: none;
+  padding: 0;
+  margin: 0;
 }
 .charsheet section.inventory .inventory-row {
   display: flex;
   gap: 5px;
-  align-items: center;
-  padding: 0 5px;
+  align-items: flex-end;
+  margin-bottom: 5px;
 }
-.charsheet section.inventory .inventory-row input[type=number] {
-  width: 50px;
+.charsheet section.inventory .inventory-cell {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+.charsheet section.inventory .inventory-cell label {
+  font-size: 0.75em;
+  font-weight: bold;
+  text-align: center;
   margin: 0;
+  width: auto;
 }
-.charsheet section.inventory .inventory-row input[type=text] {
+.charsheet section.inventory .inventory-cell:nth-child(1) {
+  width: 60px;
+}
+.charsheet section.inventory .inventory-cell:nth-child(2) {
+  width: 60px;
+}
+.charsheet section.inventory .inventory-cell.inventory-name {
   flex: 1;
+}
+.charsheet section.inventory .inventory-cell input[type=number] {
+  width: 100%;
   margin: 0;
+  text-align: center;
+  padding: 3px;
+}
+.charsheet section.inventory .inventory-cell input[type=text] {
+  width: 100%;
+  margin: 0;
+  padding: 3px 5px;
 }
 .charsheet section.inventory .inventory-footer {
   display: flex;
   flex-direction: column;
   gap: 5px;
-  margin-top: 5px;
+  margin-top: 10px;
+  padding-top: 10px;
+  border-top: 2px solid black;
   align-items: center;
 }
 .charsheet section.inventory .bulk-total {
   font-weight: bold;
   font-size: 1.1em;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 5px;
 }
-.charsheet section.inventory .bulk-display,
-.charsheet section.inventory .bulk-limit-display {
+.charsheet section.inventory .bulk-display-readonly {
+  border: none;
+  background: transparent;
   font-weight: bold;
   font-size: 1.1em;
+  text-align: center;
+  padding: 0;
   color: black;
-  display: inline;
+  width: 150px;
+  pointer-events: none;
 }
-.charsheet section.inventory input[name="attr_inventory_bulk_over_limit"]:checked ~ .inventory-footer .bulk-total .bulk-display {
+.charsheet section.inventory input[name="attr_inventory_bulk_over_limit"]:checked ~ .inventory-footer .bulk-total .bulk-display-readonly {
   color: red !important;
+}
+.charsheet section.inventory .repcontrol {
+  display: flex;
+  flex-direction: row-reverse;
+  justify-content: center;
+  gap: 10px;
+  margin: 10px 0;
+}
+.charsheet section.inventory .repcontrol button {
+  padding: 5px 10px;
+  font-weight: bold;
+  background: #f0f0f0;
+  border: 1px solid #999;
+  cursor: pointer;
+}
+.charsheet section.inventory .repcontrol button:hover {
+  background: #e0e0e0;
+}
+.charsheet section.inventory .repitem {
+  margin-bottom: 3px;
+  position: relative;
+}
+.charsheet section.inventory .repitem .itemcontrol button {
+  background: #ff6b6b;
+  color: white;
+  border: none;
+  padding: 2px 6px;
+  cursor: pointer;
+  font-size: 0.9em;
+  border-radius: 3px;
+  margin-left: 5px;
+}
+.charsheet section.inventory .repitem .itemcontrol button:hover {
+  background: #ff5252;
 }
 .charsheet main.settings input[type=checkbox] {
   width: 44px;
@@ -936,11 +989,12 @@
   width: 100%;
   box-sizing: border-box;
   margin-top: 0;
+  background: transparent;
+  border: none;
+  opacity: 1;
 }
 .charsheet section.weapons h2 {
-  text-align: center;
-  margin: 5px 0;
-  color: white;
+  display: none;
 }
 .charsheet .weapons-container {
   display: flex;
@@ -953,7 +1007,8 @@
   box-sizing: border-box;
 }
 .charsheet .weapon-box {
-  background: transparent;
+  background: white;
+  opacity: 0.9;
   border: 2px solid black;
   padding: 8px;
   flex: 1;

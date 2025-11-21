@@ -319,26 +319,28 @@
       </div>
       <section class="inventory columnflex nowrap center">
         <h4>Inventory</h4>
-        <input type="hidden" name="attr_inventory_bulk_total_display" value="0"/>
         <input type="checkbox" name="attr_inventory_bulk_over_limit" value="1" style="display: none;"/>
-        <div class="inventory-header">
-          <span class="header-bulk">Bulk</span>
-          <span class="header-amount">Amount</span>
-          <span class="header-name">Name</span>
-        </div>
         <fieldset class="repeating_inventory">
           <div class="inventory-row">
-            <input name="attr_item_bulk" type="number" value="0" placeholder="0" title="Bulk"/>
-            <input name="attr_item_amount" type="number" value="1" placeholder="1" title="Amount"/>
-            <input name="attr_item_name" type="text" placeholder="Item name" title="Item name"/>
+            <div class="inventory-cell">
+              <label>Bulk</label>
+              <input name="attr_item_bulk" type="number" value="0" placeholder="0"/>
+            </div>
+            <div class="inventory-cell">
+              <label>Amt</label>
+              <input name="attr_item_amount" type="number" value="1" placeholder="1"/>
+            </div>
+            <div class="inventory-cell inventory-name">
+              <label>Item Name</label>
+              <input name="attr_item_name" type="text" placeholder="Enter item name"/>
+            </div>
           </div>
         </fieldset>
+        <input type="hidden" name="attr_inventory_bulk_total_display" value="0"/>
+        <input type="hidden" name="attr_inventory_bulk_display_text" value="0 / 8"/>
         <div class="inventory-footer">
           <div class="bulk-total">
-            <span>Total Bulk: </span>
-            <span class="bulk-display">@{inventory_bulk_total_display}</span>
-            <span> / </span>
-            <span class="bulk-limit-display">@{bulk}</span>
+            <input type="text" name="attr_inventory_bulk_display_text" class="bulk-display-readonly" readonly/>
           </div>
         </div>
       </section>
@@ -1283,9 +1285,13 @@ function calculateInventoryBulk() {
 
             const characterBulk = int(values.bulk) || 8;
             const isOverLimit = totalBulk > characterBulk ? 1 : 0;
+            const displayText = "Total Bulk: " + totalBulk + " / " + characterBulk;
+
+            console.log("Bulk calculation - Total: " + totalBulk + ", Limit: " + characterBulk + ", Over: " + isOverLimit);
 
             setAttrs({
                 inventory_bulk_total_display: totalBulk,
+                inventory_bulk_display_text: displayText,
                 inventory_bulk_over_limit: isOverLimit
             });
         });
